@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
@@ -22,24 +21,19 @@ class AppInterceptors extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
     debugPrint("response is getting");
-    if (response.statusCode == 401) {
-     
-    }
+    if (response.statusCode == 401) {}
     return handler.next(response);
   }
 
   @override
   Future onError(DioException err, ErrorInterceptorHandler handler) async {
- 
-      
-        String? error = err.response?.data['error'] ?? "wrong_request";
-        return handler.next(
-          DioException(
-            requestOptions: err.requestOptions,
-            message: error!.tr,
-          ),
-        );
-     
-    }
-  
+    print(err.error.toString());
+    String? error = err.response?.data['meta']['message'] ?? "wrong_request";
+    return handler.next(
+      DioException(
+        requestOptions: err.requestOptions,
+        message: error!.tr,
+      ),
+    );
+  }
 }
