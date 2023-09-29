@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:padilni/presentation/auth/login/controller/login_binding.dart';
 import 'package:padilni/presentation/auth/login/login_page.dart';
+import 'package:padilni/presentation/auth/newpassword/new_password_page.dart';
 import 'package:padilni/presentation/home/screen/home_page.dart';
 import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
 import 'package:padilni/presentation/onboarding/onboarding_page.dart';
@@ -16,9 +17,12 @@ class AppRoutes {
 
   static const String login = '/login';
 
+  static const String newPassword = '/new-password';
+
   static List<GetPage> appRoutes = [
     GetPage(name: base, page: () => SplashScreen()),
     GetPage(name: main, page: () => MainScreen()),
+    GetPage(name: newPassword, page: () => NewPasswordPage()),
     GetPage(name: onboarding, page: () => OnBoardingPage()),
     GetPage(name: login, page: () => LoginPage(), binding: LoginBindings())
   ];

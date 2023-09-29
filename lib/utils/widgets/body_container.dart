@@ -8,9 +8,9 @@ class BodyContainer extends StatelessWidget {
   const BodyContainer(
       {super.key,
       required this.children,
-      this.initialSize = 0.73,
+      this.initialSize = 0.7,
       this.maxSize = 0.85,
-      this.minSize = 0.73});
+      this.minSize = 0.7});
 
   @override
   Widget build(BuildContext context) {

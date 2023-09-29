@@ -8,11 +8,13 @@ class CustomFormField extends StatelessWidget {
       required this.hinttext,
       required this.controller,
       required this.validator,
+      this.onChanged,
       this.suffix});
   final String hinttext;
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final IconData? suffix;
+  final onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class CustomFormField extends StatelessWidget {
             children: [
               Flexible(
                 child: TextFormField(
+                    onChanged: onChanged,
                     controller: controller,
                     validator: validator,
                     style: TextStyle(fontSize: Get.width * 0.04),

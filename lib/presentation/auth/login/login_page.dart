@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                     // } else if (!regex.hasMatch(passNonNullValue)) {
                     //   return ("Password should contain upper,lower,digit and Special character");
                     // }
-                    // return null;
+                    return null;
                   },
                   controller: passwordController,
                   suffix: Icons.lock,
