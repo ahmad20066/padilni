@@ -23,15 +23,16 @@ class CustomFormField extends StatelessWidget {
         decoration: BoxDecoration(
             color: AppColors.sixthcolor,
             borderRadius: BorderRadius.circular(Get.width * 0.07)),
-        height: Get.height * 0.07,
+        height: Get.height * 0.1,
         child: Padding(
           padding: EdgeInsets.only(
             left: Get.width * 0.06,
           ),
           child: Row(
             children: [
-              Expanded(
+              Flexible(
                 child: TextFormField(
+                    controller: controller,
                     validator: validator,
                     style: TextStyle(fontSize: Get.width * 0.04),
                     decoration: InputDecoration(

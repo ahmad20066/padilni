@@ -17,5 +17,5 @@ var theme = ThemeData(
             fontWeight: FontWeight.normal),
         bodySmall: GoogleFonts.poppins(
             color: AppColors.fourthColor,
-            fontSize: 15,
+            fontSize: 12,
             fontWeight: FontWeight.normal)));
