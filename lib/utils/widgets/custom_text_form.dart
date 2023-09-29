@@ -23,10 +23,12 @@ class CustomFormField extends StatelessWidget {
         decoration: BoxDecoration(
             color: AppColors.sixthcolor,
             borderRadius: BorderRadius.circular(Get.width * 0.07)),
-        height: Get.height * 0.1,
         child: Padding(
-          padding: EdgeInsets.only(
-            left: Get.width * 0.06,
+          padding: EdgeInsets.fromLTRB(
+          Get.width*0.055 ,
+          Get.width * 0.015,
+          Get.width*0.015 ,
+          Get.width*0.02 
           ),
           child: Row(
             children: [

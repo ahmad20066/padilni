@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:padilni/data/repositories/login_repository.dart';
 import 'package:padilni/models/login/login_model.dart';
-import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
 import 'package:padilni/utils/local/shared.dart';
 import 'package:padilni/utils/request_status.dart';
 import 'package:padilni/utils/routes/app_routes.dart';

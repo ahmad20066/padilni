@@ -6,10 +6,7 @@ import 'package:padilni/presentation/home/widgets/carousel/home_carousel.dart';
 import 'package:padilni/presentation/home/widgets/categories/categories_list.dart';
 import 'package:padilni/presentation/home/widgets/list/list.dart';
 import 'package:padilni/presentation/home/widgets/title_widget.dart';
-import 'package:padilni/presentation/onboarding/widget/page_view_widget.dart';
-import 'package:padilni/utils/colors.dart';
 import 'package:padilni/utils/widgets/body_container.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});

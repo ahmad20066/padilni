@@ -3,10 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:padilni/presentation/auth/login/controller/login_controller.dart';
 import 'package:padilni/presentation/auth/resetpassword/reset_password_page.dart';
-import 'package:padilni/presentation/auth/signup/sign_up_page.dart';
 import 'package:padilni/presentation/auth/widgets/custom_row_button.dart';
-import 'package:padilni/presentation/home/screen/home_page.dart';
-import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
 import 'package:padilni/utils/request_status.dart';
 import 'package:padilni/utils/widgets/auth_appbar.dart';
 import 'package:padilni/utils/widgets/custom_button.dart';
@@ -71,6 +68,7 @@ class LoginPage extends StatelessWidget {
                     //   return ("Password should contain upper,lower,digit and Special character");
                     // }
                     // return null;
+                    return ;
                   },
                   controller: passwordController,
                   suffix: Icons.lock,
@@ -219,7 +217,7 @@ class LoginPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.03),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => SignUpPage());
+                    Get.toNamed("/signup");
                   },
                   child: CustomRowButton(
                       text1: "Don't have an account ?",

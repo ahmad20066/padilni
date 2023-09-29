@@ -12,7 +12,9 @@ final String text;
       title: Text(text,style: Theme.of(context).textTheme.bodyMedium!.copyWith(
         fontWeight: FontWeight.w600
       ),), 
-      leading: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,color: Colors.black,)),
+      leading: IconButton(onPressed: (){
+        Get.back();
+      }, icon: const Icon(Icons.arrow_back,color: Colors.black,)),
       centerTitle: true, 
       actions: [
         Padding(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/presentation/home/widgets/list/list_item.dart';
 import 'package:padilni/presentation/search/controllers/search_controller.dart';
-import 'package:padilni/utils/widgets/auth_appbar.dart';
 import 'package:padilni/utils/widgets/body_container.dart';
 import 'package:padilni/utils/widgets/home_appbar.dart';
 

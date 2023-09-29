@@ -7,17 +7,16 @@ var theme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.secondaryColor,
     ),
     //  useMaterial3: true, 
-    iconTheme: IconThemeData(color: Colors.black),
     textTheme: TextTheme(
         bodyLarge: GoogleFonts.poppins(
           color: AppColors.fourthColor,
-          fontSize: 25,
+          fontSize: Get.width*0.07,
         ),
         bodyMedium: GoogleFonts.poppins(
             color: AppColors.fourthColor,
-            fontSize: 20,
+            fontSize: Get.width*0.05,
             fontWeight: FontWeight.normal),
         bodySmall: GoogleFonts.poppins(
             color: AppColors.fourthColor,
-            fontSize: 12,
+            fontSize: Get.width*0.03,
             fontWeight: FontWeight.normal)));

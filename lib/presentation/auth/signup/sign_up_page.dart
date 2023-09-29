@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:padilni/presentation/auth/signup/logic/sign_up_controller.dart';
 import 'package:padilni/presentation/auth/widgets/custom_row_button.dart';
+import 'package:padilni/utils/request_status.dart';
 import 'package:padilni/utils/widgets/auth_appbar.dart';
 import 'package:padilni/utils/widgets/custom_button.dart';
 import 'package:padilni/utils/widgets/custom_text_form.dart';
@@ -16,7 +18,9 @@ class SignUpPage extends StatelessWidget {
   var passwordController = TextEditingController();
   var nameController  = TextEditingController();
   var confirmPasswordController = TextEditingController();
-  var signUpKey = GlobalKey<FormState>();
+  var signUpKey = GlobalKey<FormState>(); 
+
+  var signUpController = Get.find<SignUpController>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class SignUpPage extends StatelessWidget {
                     {
                       return "required feild".tr;
                     } 
-                   if(GetUtils.isUsername(v))
+                   if(!GetUtils.isUsername(v))
                     {
                     return "unvalid username".tr;
                     }
@@ -60,7 +64,7 @@ class SignUpPage extends StatelessWidget {
                     { 
                       return "required feild".tr;
                     } 
-                    if(GetUtils.isEmail(v))
+                    if(!GetUtils.isEmail(v))
                     {
                       return "Invalid email address".tr;
                     } 
@@ -95,6 +99,7 @@ class SignUpPage extends StatelessWidget {
                     {
                       return "password and this feild does not match".tr;
                     }
+                    return null;
                   },
                   controller: confirmPasswordController,
                   suffix: Icons.lock,
@@ -102,27 +107,40 @@ class SignUpPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.02),
                 SizedBox(
                   width: Get.width * 0.87,
-                  child: CustomButton(
-                      buttomColor: AppColors.fifthcolor,
-                      onpressed: () {},
-                      child: Row(children: [
-                        GetWidth(width: Get.width * 0.3),
-                        Text(
-                          "Sign Up",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(color: AppColors.primaryColor),
-                        ),
-                        GetWidth(width: Get.width * 0.14),
-                        SizedBox(
-                            height: Get.height * 0.026,
-                            child: const VerticalDivider(
-                              color: AppColors.seventhColor,
-                            )),
-                        GetWidth(width: Get.width * 0.025),
-                        SvgPicture.asset("assets/images/sign_up_icon.svg")
-                      ])),
+                  child: Obx(
+                    ()=> signUpController.requeststatus.value == RequestStatus.loading ? 
+                    const Center(child: CircularProgressIndicator(),) :
+                     CustomButton(
+                        buttomColor: AppColors.fifthcolor,
+                        onpressed: () { 
+                          if(signUpKey.currentState!.validate())
+                          { 
+                           signUpController.
+                           userRegister(email: emailController.text,
+                            password: passwordController.text, 
+                            name: nameController.text)  ;                     
+                          } 
+                  
+                        },
+                        child: Row(children: [
+                          GetWidth(width: Get.width * 0.3),
+                          Text(
+                            "Sign Up",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: AppColors.primaryColor),
+                          ),
+                          GetWidth(width: Get.width * 0.14),
+                          SizedBox(
+                              height: Get.height * 0.026,
+                              child: const VerticalDivider(
+                                color: AppColors.seventhColor,
+                              )),
+                          GetWidth(width: Get.width * 0.025),
+                          SvgPicture.asset("assets/images/sign_up_icon.svg")
+                        ])),
+                  ),
                 ),
                 GetHeight(height: Get.height * 0.07),
                 Column(

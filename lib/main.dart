@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/data/remote/diohelper.dart';
+import 'package:padilni/presentation/auth/verification/verification_page.dart';
 import 'package:padilni/presentation/splashscreen/splash_screen.dart';
 import 'package:padilni/utils/local/shared.dart';
 import 'package:padilni/utils/routes/app_routes.dart';
@@ -35,6 +35,6 @@ class MyApp extends StatelessWidget {
         theme: theme,
         getPages: AppRoutes.appRoutes,
         debugShowCheckedModeBanner: false,
-        home: SplashScreen());
+        home: VerificationPage());
   }
 }
