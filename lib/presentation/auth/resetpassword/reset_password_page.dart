@@ -38,7 +38,9 @@ class ResetPasswordPage extends StatelessWidget {
             CustomFormField(
               hinttext: "Your Email",
               controller: emailController,
-              validator: () {},
+              validator: (v) {
+                return;
+              },
               suffix: Icons.email,
             ),
             GetHeight(height: Get.height * 0.04),

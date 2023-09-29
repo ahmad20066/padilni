@@ -39,14 +39,18 @@ class LoginPage extends StatelessWidget {
               GetHeight(height: Get.height * 0.03),
               CustomFormField(
                 hinttext: "Your Email",
-                validator: () {},
+                validator: (v) {
+                  return;
+                },
                 controller: emailController,
                 suffix: Icons.email,
               ),
               GetHeight(height: Get.height * 0.01),
               CustomFormField(
                 hinttext: "Password",
-                validator: () {},
+                validator: (v) {
+                  return;
+                },
                 controller: emailController,
                 suffix: Icons.lock,
               ),
