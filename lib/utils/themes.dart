@@ -4,8 +4,10 @@ import 'package:padilni/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 var theme = ThemeData(
-    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.secondaryColor),
-    //  useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.secondaryColor,
+    ),
+    //  useMaterial3: true, 
+    iconTheme: IconThemeData(color: Colors.black),
     textTheme: TextTheme(
         bodyLarge: GoogleFonts.poppins(
           color: AppColors.fourthColor,
