@@ -31,11 +31,12 @@ class VerificationPage extends StatelessWidget {
               ) ,   
               GetHeight(height: Get.height*0.05),
              CustomPinPut(validator: (val){
+              return;
              
              }, controller: verifyTextController,),
              GetHeight(height: Get.height*0.05),
             CustomButton( 
-              
+
               onpressed: (){ 
               if(verifykey.currentState!.validate() && verifyTextController.text.length==4)
               {  

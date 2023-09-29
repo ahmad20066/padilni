@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:padilni/presentation/auth/login/controller/login_controller.dart';
-import 'package:padilni/presentation/auth/newpassword/new_password_page.dart';
 import 'package:padilni/presentation/auth/resetpassword/reset_password_controller.dart';
 import 'package:padilni/utils/request_status.dart';
 import 'package:padilni/utils/widgets/auth_appbar.dart';

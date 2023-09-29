@@ -29,7 +29,9 @@ class AppRoutes {
     GetPage(name: base, page: () => SplashScreen()),
 
     GetPage(name: main, page: () => MainScreen()),
+    
     GetPage(name: newPassword, page: () => NewPasswordPage()),
+
     GetPage(name: onboarding, page: () => OnBoardingPage()),
 
     GetPage(name: login, page: () => LoginPage(), binding: LoginBindings()),
