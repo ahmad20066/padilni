@@ -1,0 +1,16 @@
+const Map<String, String> ar = {
+  "call_technician": "اتصل بالفني",
+  "new": "جديد",
+  "enter_details": "ادخل تفاصيلك",
+  "customer_name": "اسم العميل",
+  "type_name": "اكتب الاسم ...",
+  "type_num": "اكتب الرقم ...",
+  "required_field": "حقل اجباري",
+  "floor_num": "رقم الطابق",
+  "apartment_num": "رقم الشقة",
+  "problem_desc": "وصف المشكلة",
+  "type_desc": "اكتب الوصف ...",
+  "assign_to": "اسناد إلى",
+  "problem_level": "مستوى المشكلة",
+  "send": "إرسال",
+};

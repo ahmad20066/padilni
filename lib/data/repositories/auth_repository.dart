@@ -22,11 +22,29 @@ Future<AppResponse> signUp(UserModel model) async
         success: false, 
         errorMessage: e.message ?? e.toString()
        ); 
-  } 
+  }   
 
+}  
 
+Future<AppResponse> verifyEmailAddress(UserModel model) async
+{    
+  try{   
+
+     var appResponse = await DioHelper.post(url: verifyemail , body: model.userVerifyToJson()); 
+     return AppResponse(
+      success: true , 
+      errorMessage: null ,
+      data: appResponse.data
+     );
+  } on DioException catch (e)
+  {
+      return AppResponse(
+        success: false ,
+        errorMessage: e.message ?? e.toString(),
+        data: null
+           );
+  }
+  
 }
-
-
 
 }
