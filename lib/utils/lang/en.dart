@@ -7,5 +7,5 @@ const Map<String, String> English = {
 */
 
 const Map<String, String> en = {
- 
+ "Profile":"Profile"
 };

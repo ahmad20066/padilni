@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/data/remote/diohelper.dart';
-import 'package:padilni/presentation/splashscreen/splash_screen.dart';
+import 'package:padilni/presentation/profile/profile_screen.dart';
 import 'package:padilni/utils/lang/translations.dart';
 import 'package:padilni/utils/local/shared.dart';
 import 'package:padilni/utils/routes/app_routes.dart';
@@ -40,6 +40,6 @@ class MyApp extends StatelessWidget {
           : Get.deviceLocale,
       fallbackLocale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen());
+        home: ProfileScreen());
   }
 }

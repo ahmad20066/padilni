@@ -10,11 +10,11 @@ var theme = ThemeData(
     textTheme: TextTheme(
         bodyLarge: GoogleFonts.poppins(
           color: AppColors.fourthColor,
-          fontSize: Get.width*0.07,
+          fontSize: Get.width*0.06,
         ),
         bodyMedium: GoogleFonts.poppins(
             color: AppColors.fourthColor,
-            fontSize: Get.width*0.05,
+            fontSize: Get.width*0.053,
             fontWeight: FontWeight.normal),
         bodySmall: GoogleFonts.poppins(
             color: AppColors.fourthColor,
