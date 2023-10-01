@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223667314680",
+    "project_id": "padilni-12811",
+    "storage_bucket": "padilni-12811.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223667314680:android:3f6ea6080b45a3ae5c400d",
+        "android_client_info": {
+          "package_name": "com.example.padilni"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYGsgCoo4AfFLNIxW2udVABYvik0Q9SlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
