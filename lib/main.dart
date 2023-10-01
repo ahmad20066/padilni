@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/data/remote/diohelper.dart';
 import 'package:padilni/presentation/profile/profile_screen.dart';
+import 'package:padilni/services/notification_config.dart';
 import 'package:padilni/utils/lang/translations.dart';
 import 'package:padilni/utils/local/shared.dart';
 import 'package:padilni/utils/routes/app_routes.dart';
@@ -18,10 +20,15 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
-  HttpOverrides.global = new MyHttpOverrides();
+
+  HttpOverrides.global =  MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-  await Shared.init();
+  await Firebase.initializeApp();
   await DioHelper.init();
+  NotificationConfig config = NotificationConfig();
+  await Shared.init();
+  await config.initNotification();
+  
   runApp(const MyApp());
 }
 
