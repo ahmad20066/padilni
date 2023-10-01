@@ -34,8 +34,10 @@ class LoginPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.07),
                 Center(
                   child: Text(
-                    "Log in with your email and password",
-                    style: Theme.of(context).textTheme.bodySmall,
+                    "Log in with your email and password" ,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontSize: Get.width*0.035
+                    ),
                   ),
                 ),
                 GetHeight(height: Get.height * 0.03),
@@ -51,27 +53,17 @@ class LoginPage extends StatelessWidget {
                     return null;
                   },
                   controller: emailController,
-                  suffix: Icons.email,
+                  suffix: SvgPicture.asset("assets/images/email.svg",color: AppColors.seventhColor,
+                        width: Get.width*0.05,),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
                   hinttext: "Password",
                   validator: (v) {
-                    // RegExp regex = RegExp(
-                    //     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-                    // var passNonNullValue = v ?? "";
-                    // if (passNonNullValue.isEmpty) {
-                    //   return ("Password is required");
-                    // } else if (passNonNullValue.length < 6) {
-                    //   return ("Password Must be more than 5 characters");
-                    // } else if (!regex.hasMatch(passNonNullValue)) {
-                    //   return ("Password should contain upper,lower,digit and Special character");
-                    // }
-                    // return null;
                     return ;
                   },
                   controller: passwordController,
-                  suffix: Icons.lock,
+                  suffix:Icon(Icons.lock),
                 ),
                 GetHeight(height: Get.height * 0.005),
                 Row(

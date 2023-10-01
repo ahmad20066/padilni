@@ -42,7 +42,7 @@ class NewPasswordPage extends StatelessWidget {
                     return;
                   },
                   controller: passwordController,
-                  suffix: Icons.lock_open,
+                  suffix: SvgPicture.asset("assets/images/unlock_password.svg"),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
@@ -55,7 +55,7 @@ class NewPasswordPage extends StatelessWidget {
                     return null;
                   },
                   controller: TextEditingController(),
-                  suffix: Icons.lock,
+                  suffix: Icon(Icons.lock),
                 ),
                 GetHeight(height: Get.height * 0.02),
                 SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/utils/colors.dart';
+import 'package:padilni/utils/widgets/get_width.dart';
 
 class CustomFormField extends StatelessWidget {
   const CustomFormField(
@@ -13,7 +14,7 @@ class CustomFormField extends StatelessWidget {
   final String hinttext;
   final TextEditingController controller;
   final String? Function(String?)? validator;
-  final IconData? suffix;
+  final Widget? suffix;
   final onChanged;
 
   @override
@@ -45,7 +46,7 @@ class CustomFormField extends StatelessWidget {
                       hintStyle: Theme.of(context)
                           .textTheme
                           .bodySmall!
-                          .copyWith(color: AppColors.eighthColor),
+                          .copyWith(color: AppColors.eighthColor , fontSize: Get.width*0.04),
                       border: InputBorder.none,
                     )),
               ),
@@ -59,11 +60,9 @@ class CustomFormField extends StatelessWidget {
                           height: Get.height * 0.03,
                           child: const VerticalDivider(
                             color: AppColors.seventhColor,
-                          )),
-                      Icon(
-                        suffix,
-                        color: AppColors.seventhColor,
-                      )
+                          )), 
+                          GetWidth(width: Get.width*0.005),
+                      suffix!
                     ],
                   ),
                 ),

@@ -34,7 +34,9 @@ class Continuebutton extends StatelessWidget {
             ) ,
               Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Text(text , style: Theme.of(context).textTheme.bodySmall,),
+              child: Text(text , style: Theme.of(context).textTheme.bodySmall!.copyWith(
+             fontSize: Get.width*0.035
+              ),),
             ),
           ],),
       ),

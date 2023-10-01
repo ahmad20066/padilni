@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/data/remote/diohelper.dart';
-import 'package:padilni/presentation/profile/profile_screen.dart';
+import 'package:padilni/presentation/splashscreen/splash_screen.dart';
 import 'package:padilni/services/notification_config.dart';
 import 'package:padilni/utils/lang/translations.dart';
 import 'package:padilni/utils/local/shared.dart';
@@ -47,6 +47,6 @@ class MyApp extends StatelessWidget {
           : Get.deviceLocale,
       fallbackLocale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
-        home: ProfileScreen());
+        home: SplashScreen());
   }
 }

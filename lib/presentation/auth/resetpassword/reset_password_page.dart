@@ -51,7 +51,7 @@ class ResetPasswordPage extends StatelessWidget {
               validator: (v) {
                 return;
               },
-              suffix: Icons.email,
+              suffix:SvgPicture.asset( "assets/images/email.svg"),
             ),
             GetHeight(height: Get.height * 0.04),
             Obx(() =>

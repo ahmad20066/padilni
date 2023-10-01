@@ -6,6 +6,7 @@ import 'package:padilni/presentation/onboarding/widget/skip_button.dart';
 import 'package:padilni/utils/colors.dart';
 import 'package:padilni/utils/widgets/custom_button.dart';
 import 'package:padilni/utils/widgets/get_height.dart';
+import 'package:padilni/utils/widgets/get_width.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // ignore: must_be_immutable
@@ -62,7 +63,8 @@ int cnt = 0;
         Get.toNamed('/login');
       },
       child:Text("Get Started" , style: Theme.of(context).textTheme.bodyMedium!
-      .copyWith(color: AppColors.primaryColor),),):
+      .copyWith(color: AppColors.primaryColor, 
+      fontSize: Get.width*0.043,fontWeight: FontWeight.normal),),):
        Row(
         children: [
           SkipButton(image: "assets/images/skip_icon.png", text: "Skip", 
@@ -71,9 +73,9 @@ int cnt = 0;
           }, 
           padding: EdgeInsets.fromLTRB(Get.width*0.13 , 0 , 0 , 0),),
 
-          const Spacer(),
+           GetWidth(width: Get.width*0.3,),
 
-           Continuebutton(image: "assets/images/continue_icon.png", text: "Continue", 
+           Continuebutton(image: "assets/images/continue_icon.png", text: "Next", 
           onTap: (){ 
           setState(() {
               cnt = cnt+1;

@@ -54,7 +54,7 @@ class SignUpPage extends StatelessWidget {
                     return  null;
                   },
                   controller: nameController,
-                  suffix: Icons.person,
+                  suffix: SvgPicture.asset("assets/images/person.svg"),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
@@ -72,7 +72,7 @@ class SignUpPage extends StatelessWidget {
                   },
 
                   controller: emailController,
-                  suffix: Icons.email,
+                  suffix:SvgPicture.asset("assets/images/email.svg"),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
@@ -85,7 +85,7 @@ class SignUpPage extends StatelessWidget {
                    return null;
                   },
                   controller:passwordController,
-                  suffix: Icons.lock,
+                  suffix:Icon(Icons.lock),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
@@ -102,7 +102,7 @@ class SignUpPage extends StatelessWidget {
                     return null;
                   },
                   controller: confirmPasswordController,
-                  suffix: Icons.lock,
+                  suffix: Icon(Icons.lock),
                 ),
                 GetHeight(height: Get.height * 0.02),
                 SizedBox(

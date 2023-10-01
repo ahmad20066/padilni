@@ -10,7 +10,8 @@ final String text;
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       elevation: 0,
       title: Text(text,style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-        fontWeight: FontWeight.w600
+        fontWeight: FontWeight.w500  , 
+        fontSize: Get.width*0.05
       ),), 
       leading: IconButton(onPressed: (){
         Get.back();
