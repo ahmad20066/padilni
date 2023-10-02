@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/data/local/sharedhelper.dart';
 import 'package:padilni/data/repositories/auth_repository.dart';
-import 'package:padilni/data/repositories/login_repository.dart';
 import 'package:padilni/models/login/social_login.dart';
 import 'package:padilni/models/user/user_model.dart';
 import 'package:padilni/utils/request_status.dart';
@@ -20,7 +18,8 @@ class SignUpController extends GetxController {
       {required String email,
       required String password,
       required String name}) async {
-    setRequestStatus(RequestStatus.loading);
+    setRequestStatus(RequestStatus.loading); 
+    Shared.setstring("email", email);
     UserModel userModel = UserModel(
         email: email,
         password: password,
@@ -33,7 +32,8 @@ class SignUpController extends GetxController {
       debugPrint("pravo");
 
       Get.toNamed("/verification");
-    } else {
+    } else { 
+      print(response.errorMessage);
       setRequestStatus(RequestStatus.onerror);
       debugPrint("Not pravo");
     }
@@ -52,7 +52,7 @@ class SignUpController extends GetxController {
         device_type: Platform.isAndroid ? "android" : "ios",
         device_uuid: Shared.getstring("uuid")!,
         notification_token: "123");
-    var response = await LoginRepository().socialLogin(model);
+    var response = await AuthRepository().socialLogin(model);
 
     if (response.success!) {
       setRequestStatus(RequestStatus.success);
@@ -76,7 +76,7 @@ class SignUpController extends GetxController {
         device_type: Platform.isAndroid ? "android" : "ios",
         device_uuid: Shared.getstring("uuid")!,
         notification_token: "123");
-    var response = await LoginRepository().socialLogin(model);
+    var response = await AuthRepository().socialLogin(model);
 
     if (response.success!) {
       setRequestStatus(RequestStatus.success);

@@ -9,54 +9,54 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      surfaceTintColor: Colors.white,
-      semanticContainer: false,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 6,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              child: Image.asset(
-                "assets/images/onboarding2.png",
-                height: Get.height * 0.15,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
-            Row(
-              children: [
-                Text(
-                  product.name,
-                  style: GoogleFonts.poppins(
-                      fontSize: 16, fontWeight: FontWeight.w500),
+    return SizedBox(
+      height: Get.height*0.13,
+      child: Card( 
+        surfaceTintColor: Colors.white,
+        semanticContainer: false,
+        color: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Get.width*0.025)),
+        elevation: 6,
+        child: Padding(
+          padding:  EdgeInsets.all(Get.width*0.02),
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                child: Image.asset(
+                  "assets/images/onboarding2.png",
+                  height: Get.height * 0.15,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
                 ),
-                Spacer(),
-                Text(
-                  product.type,
-                  style: GoogleFonts.poppins(fontSize: 10),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "30\$",
-                style: GoogleFonts.poppins(color: Colors.purple, fontSize: 13),
               ),
-            )
-          ],
+              Row(
+                children: [
+                  Text(
+                    product.name,
+                    style: GoogleFonts.poppins(
+                        fontSize: Get.width*0.04, fontWeight: FontWeight.w500),
+                  ),
+                  Spacer(),
+                  Text(
+                    product.type,
+                    style: GoogleFonts.poppins(fontSize: Get.width*0.025),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: Get.height * 0.01,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "30\$",
+                  style: GoogleFonts.poppins(color: Colors.purple, fontSize: Get.width*0.031),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:padilni/presentation/auth/verification/logic/verification_controller.dart';
 import 'package:padilni/presentation/auth/widgets/custom_pin_put.dart';
 import 'package:padilni/presentation/auth/widgets/custom_row_button.dart';
+import 'package:padilni/utils/request_status.dart';
 import 'package:padilni/utils/widgets/auth_appbar.dart';
 import 'package:padilni/utils/widgets/custom_button.dart';
+import 'package:padilni/utils/widgets/loader.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/widgets/get_height.dart';
 
@@ -13,6 +16,8 @@ class VerificationPage extends StatelessWidget {
    
    var verifyTextController  = TextEditingController();
    var verifykey = GlobalKey<FormState>();
+
+   var verifacationController = Get.find<VerifacationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +40,21 @@ class VerificationPage extends StatelessWidget {
              
              }, controller: verifyTextController,),
              GetHeight(height: Get.height*0.05),
-            CustomButton( 
-
-              onpressed: (){ 
-              if(verifykey.currentState!.validate() && verifyTextController.text.length==4)
-              {  
-                  print("zzz");
-              }       
-               },
-                buttomColor: AppColors.secondaryColor, 
-               child: Text("Verify" , style: Theme.of(context).textTheme.bodyMedium!
-                      .copyWith(color: AppColors.primaryColor),)),
+            Obx(
+              ()=> verifacationController.verifyRequstStatus.value ==RequestStatus.loading? 
+              const Loader() :
+               CustomButton( 
+                onpressed: (){ 
+                if(verifykey.currentState!.validate() && 
+                verifyTextController.text.length==4)
+                {   
+                  verifacationController.verifyemailAddress(code: verifyTextController.text);
+                }       
+                 },
+                  buttomColor: AppColors.secondaryColor, 
+                 child: Text("Verify" , style: Theme.of(context).textTheme.bodyMedium!
+                        .copyWith(color: AppColors.primaryColor),)),
+            ),
            
             GetHeight(height: Get.height*0.02), 
         

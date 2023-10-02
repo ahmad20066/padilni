@@ -1,20 +1,26 @@
 import 'package:get/get.dart';
-import 'package:padilni/data/repositories/login_repository.dart';
+import 'package:padilni/data/repositories/auth_repository.dart';
 import 'package:padilni/utils/request_status.dart';
 import 'package:padilni/utils/routes/app_routes.dart';
 
 class ResetPasswordController extends GetxController {
+
   Rx<RequestStatus> forgotPasswordStatus = RequestStatus.begin.obs;
+
   Rx<RequestStatus> verifyStatus = RequestStatus.begin.obs;
-  LoginRepository _repo = LoginRepository();
+
+  final AuthRepository _repo = AuthRepository();
+  
   forgotPassword(String email) async {
     forgotPasswordStatus(RequestStatus.loading);
     final appResponse = await _repo.forgotPassword(email);
     if (appResponse.success!) {
       forgotPasswordStatus(RequestStatus.success);
       // Get.toNamed(AppRoutes.newPassword);
-    } else {
+    } else { 
+
       forgotPasswordStatus(RequestStatus.onerror);
+
       Get.snackbar("Error", appResponse.errorMessage!);
     }
   }
