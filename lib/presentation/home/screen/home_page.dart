@@ -30,9 +30,9 @@ class _HomePageState extends State<HomePage> {
                 height: Get.height * 0.05,
               ),
               TitleWidget(title: "Categories"),
-              SizedBox(
-                height: Get.height * 0.03,
-              ),
+              // SizedBox(
+              //   height: Get.height * 0.01,
+              // ),
               CategoriesList(categories: controller.categories),
               TitleWidget(title: "List"),
               ListGrid(products: [

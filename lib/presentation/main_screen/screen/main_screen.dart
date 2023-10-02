@@ -9,8 +9,9 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       floatingActionButton: SizedBox(
-        height: Get.height * 0.1,
+        height: Get.height * 0.09,
         child: FittedBox(
           child: FloatingActionButton(
             backgroundColor: AppColors.fifthcolor,
@@ -23,8 +24,8 @@ class MainScreen extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
           height: Get.height * 0.1,
           color: Colors.white,
-          shape: CircularNotchedRectangle(),
-          notchMargin: 25,
+          shape: const CircularNotchedRectangle(),
+          notchMargin: Get.width*0.055,
           child: Obx(
             () => Row(
               children: <Widget>[
@@ -37,7 +38,7 @@ class MainScreen extends StatelessWidget {
                     color: controller.currentIndex.value == 0
                         ? AppColors.fifthcolor
                         : Colors.grey,
-                    size: 30,
+                    size: Get.width*0.075,
                   ),
                   onPressed: () {
                     controller.currentIndex.value = 0;
@@ -52,7 +53,7 @@ class MainScreen extends StatelessWidget {
                     color: controller.currentIndex.value == 1
                         ? AppColors.fifthcolor
                         : Colors.grey,
-                    size: 30,
+                    size:  Get.width*0.075,
                   ),
                   onPressed: () {
                     controller.currentIndex.value = 1;
@@ -67,7 +68,7 @@ class MainScreen extends StatelessWidget {
                     color: controller.currentIndex.value == 2
                         ? AppColors.fifthcolor
                         : Colors.grey,
-                    size: 30,
+                    size:  Get.width*0.075,
                   ),
                   onPressed: () {
                     controller.currentIndex.value = 2;
@@ -82,7 +83,7 @@ class MainScreen extends StatelessWidget {
                     color: controller.currentIndex.value == 3
                         ? AppColors.fifthcolor
                         : Colors.grey,
-                    size: 30,
+                    size:  Get.width*0.075,
                   ),
                   onPressed: () {
                     controller.currentIndex.value = 3;

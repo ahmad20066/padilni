@@ -95,14 +95,14 @@ class SignUpPage extends StatelessWidget {
                     {
                       return "required feild".tr;
                     } 
-                    if(v!=passwordController.text)
+                    if(v.compareTo(passwordController.text)!=0)
                     {
-                      return "password and this feild does not match".tr;
+                      return "check the password again".tr;
                     }
                     return null;
                   },
                   controller: confirmPasswordController,
-                  suffix: Icon(Icons.lock),
+                  suffix: const Icon(Icons.lock),
                 ),
                 GetHeight(height: Get.height * 0.02),
                 SizedBox(

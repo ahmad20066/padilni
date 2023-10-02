@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:padilni/presentation/auth/resetpassword/reset_password_controller.dart';
+import 'package:padilni/presentation/auth/widgets/custom_pin_put.dart';
 import 'package:padilni/utils/request_status.dart';
 import 'package:padilni/utils/widgets/auth_appbar.dart';
 import 'package:padilni/utils/widgets/custom_button.dart';
@@ -19,8 +20,7 @@ class ResetPasswordPage extends StatelessWidget {
   var codeController = TextEditingController();
   final ResetPasswordController controller =
       Get.put<ResetPasswordController>(ResetPasswordController());
-
-  TextEditingController pincontroller = TextEditingController();
+  var pinPutController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,31 +57,15 @@ class ResetPasswordPage extends StatelessWidget {
             Obx(() =>
                 controller.forgotPasswordStatus.value == RequestStatus.success
                     ? Center(
-                        child: SizedBox(
-                          height: Get.height * 0.072,
-                          width: Get.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: pin(),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: pin(),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: pin(),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: pin(),
-                              ),
-                            ],
-                          ),
-                        ),
+                        child: CustomPinPut(controller: pinPutController,
+                        validator: (val){
+
+                          if(val!.isEmpty && val.length!=4)
+                          {
+                            return "Enter valid PinPut";
+                          } 
+                          return null ;
+                        },)
                       )
                     : Container()),
             SizedBox(
@@ -92,7 +76,7 @@ class ResetPasswordPage extends StatelessWidget {
                 child: Obx(() {
                   switch (controller.forgotPasswordStatus.value) {
                     case RequestStatus.loading:
-                      return Loader();
+                      return const Loader();
                     case RequestStatus.begin:
                       return CustomButton(
                           buttomColor: AppColors.fifthcolor,
@@ -125,7 +109,7 @@ class ResetPasswordPage extends StatelessWidget {
                               buttomColor: AppColors.fifthcolor,
                               onpressed: () {
                                 controller.forgotPasswordVerify(
-                                    emailController.text, pincontroller.text);
+                                    emailController.text, pinPutController.text);
                               },
                               child: Row(children: [
                                 GetWidth(width: Get.width * 0.33),
@@ -183,30 +167,5 @@ class ResetPasswordPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget pin() {
-    return Container(
-        height: Get.height * 0.07,
-        width: Get.width * 0.13,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Get.width * 0.04),
-            border: Border.all(color: AppColors.thirdColor.withOpacity(1))),
-        child: Padding(
-          padding: EdgeInsets.all(Get.width * 0.02),
-          child: TextFormField(
-            controller: pincontroller,
-            onChanged: (val) {
-              if (!val.isEmpty) {
-                print(val);
-
-                pincontroller =
-                    TextEditingController(text: val.split("").first);
-              }
-            },
-            textAlign: TextAlign.center,
-            showCursor: false,
-          ),
-        ));
   }
 }

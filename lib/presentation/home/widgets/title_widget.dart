@@ -21,9 +21,9 @@ class TitleWidget extends StatelessWidget {
         ),
         Divider(
           thickness: 2,
-          color: Colors.grey,
+          color: Colors.grey[200],
           indent: Get.width * 0.1,
-          endIndent: Get.width * 0.4,
+          endIndent: Get.width * 0.1,
         )
       ],
     );

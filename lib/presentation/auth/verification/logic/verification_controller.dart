@@ -4,6 +4,7 @@ import 'package:padilni/data/local/sharedhelper.dart';
 import 'package:padilni/data/repositories/auth_repository.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:padilni/models/user/user_model.dart';
+import 'package:padilni/utils/request_status.dart';
 import '../../../../utils/methods/device_type.dart';
 
 class VerifacationController extends GetxController {
@@ -22,20 +23,33 @@ class VerifacationController extends GetxController {
     }
 
     return deviceId;
-  }
+  }   
+  
+  var verifyRequstStatus = RequestStatus.begin.obs;
+
+  changeRequestStatus(RequestStatus status)=> verifyRequstStatus.value= status;
 
   Future<void> verifyemailAddress({String? code, String? email}) async {
-    String uuid = Shared.getstring("uuid")!;
+    changeRequestStatus(RequestStatus.loading);
     String deviceType = deviceTypeSelected();
     UserModel model = UserModel(
-        email: email, deviceType: deviceType, deviceToken: "988", uuid: uuid);
+        email: "fawazhamza906@gmail.com",
+        device_type: deviceType, 
+        code: code,
+        notification_token: Shared.getstring("fcm_token"),
+        device_uuid:Shared.getstring("uuid")! );
 
     var response = await _authRepository.verifyEmailAddress(model);
 
-    if (response.success!) {
-      print("hello from success");
+    if (response.success!) { 
+      changeRequestStatus(RequestStatus.success);
+      Get.offAllNamed("/main");
     } else if (!response.success!) {
-      print("hello from fail");
+       print(response.errorMessage);
+
+      Get.snackbar("Error", "failed to verify!");
+      changeRequestStatus(RequestStatus.onerror);
+
     }
   }
 }
