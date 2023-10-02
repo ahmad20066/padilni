@@ -59,11 +59,15 @@ class LoginPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
                   hinttext: "Password",
-                  validator: (v) {
-                    return ;
+                  validator: (v) {  
+                    if(v!.isEmpty)
+                    {
+                      return "Please Enter a valid password";
+                    }
+                    return null;
                   },
                   controller: passwordController,
-                  suffix:Icon(Icons.lock),
+                  suffix: const Icon(Icons.lock),
                 ),
                 GetHeight(height: Get.height * 0.005),
                 Row(
@@ -99,15 +103,14 @@ class LoginPage extends StatelessWidget {
                     width: Get.width * 0.87,
                     child: Obx(() {
                       return controller.status.value == RequestStatus.loading
-                          ? Loader()
+                          ? const Loader()
                           : CustomButton(
                               buttomColor: AppColors.fifthcolor,
-                              onpressed: () {
-                                _formKey.currentState!.validate();
-                                // Get.to(() => MainScreen());
-                                print(emailController.text);
+                              onpressed: () { 
+                                if(_formKey.currentState!.validate()){
                                 controller.login(emailController.text,
                                     passwordController.text);
+                                }
                               },
                               child: Row(children: [
                                 GetWidth(width: Get.width * 0.34),

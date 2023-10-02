@@ -23,7 +23,7 @@ class LoginController extends GetxController {
         password: password,
         device_type: deviceType,
         device_uuid: 11,
-        notification_token: 11);
+        notification_token: Shared.getstring("fcm_token")!);
     final appResponse = await _repo.login(model);
     if (appResponse.success!) {
       Shared.setstring(

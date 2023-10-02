@@ -29,7 +29,7 @@ class NewPasswordController extends GetxController {
         password: password,
         device_type: deviceType,
         device_uuid: 11,
-        notification_token: 11);
+        notification_token: Shared.getstring("token")!);
     final appResponse = await _repo.forgotPasswordChange(model, code!);
     if (appResponse.success!) {
       Shared.setstring(

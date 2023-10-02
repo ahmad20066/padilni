@@ -4,7 +4,7 @@ class LoginModel {
   final String password;
   final String device_type;
   final int device_uuid;
-  final int notification_token;
+  final String notification_token;
   LoginModel({
     required this.email,
     required this.password,
