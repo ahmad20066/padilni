@@ -3,19 +3,19 @@ class UserModel
   final String? email ;
   final String? name ;
   final String? password ;
-  final String? deviceToken ; 
-  final String? uuid ; 
+  final String? notification_token ; 
+  final String? device_uuid ; 
   final String? code ; 
-  final String? deviceType;
+  final String? device_type;
 
   UserModel({
     this.email,
     this.name,
     this.password ,
-    this.deviceType ,
+    this.device_type ,
     this.code ,
-    this.deviceToken ,
-    this.uuid
+    this.notification_token ,
+    this.device_uuid
    }); 
 
    Map<String,dynamic> userRegisterToJson()
@@ -32,11 +32,20 @@ class UserModel
      return { 
       "email": email ,
       "code":code ,
-      "device_type":deviceType ,
-      "device_uuid":uuid ,
-      "notification_token":deviceToken
+      "device_type":device_type ,
+      "device_uuid":device_uuid ,
+      "notification_token":notification_token
       
      };
-
-   }
+   } 
+   
+  Map<String, dynamic> loginToJSon() {
+    return {
+      'email': email,
+      'password': password,
+      'device_type': device_type,
+      'device_uuid': device_uuid,
+      'notification_token': notification_token,
+    };
+  }
 }

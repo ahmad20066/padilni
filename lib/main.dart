@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,15 +21,25 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
-
-  HttpOverrides.global =  MyHttpOverrides();
+  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
   await DioHelper.init();
   NotificationConfig config = NotificationConfig();
   await Shared.init();
   await config.initNotification();
-  
+  if (Shared.getstring("uuid") == null) {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      Shared.setstring("uuid", androidInfo.id);
+    } else {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      Shared.setstring("uuid", iosInfo.identifierForVendor!);
+    }
+  }
+
   runApp(const MyApp());
 }
 
@@ -43,9 +54,9 @@ class MyApp extends StatelessWidget {
         getPages: AppRoutes.appRoutes,
         translations: Translation(),
         locale: Shared.getstring("lang") != null
-          ? Locale(Shared.getstring("lang")!)
-          : Get.deviceLocale,
-      fallbackLocale: const Locale('ar'),
+            ? Locale(Shared.getstring("lang")!)
+            : Get.deviceLocale,
+        fallbackLocale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
         home: SplashScreen());
   }
