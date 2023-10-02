@@ -80,7 +80,6 @@ class SignUpController extends GetxController {
 
     if (response.success!) {
       setRequestStatus(RequestStatus.success);
-
       Get.toNamed("/verification");
     } else {
       setRequestStatus(RequestStatus.onerror);
