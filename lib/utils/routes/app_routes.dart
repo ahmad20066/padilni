@@ -1,3 +1,4 @@
+
 import 'package:get/get.dart';
 import 'package:padilni/presentation/auth/login/controller/login_binding.dart';
 import 'package:padilni/presentation/auth/login/login_page.dart';
@@ -6,6 +7,7 @@ import 'package:padilni/presentation/auth/signup/logic/sign_up_binding.dart';
 import 'package:padilni/presentation/auth/signup/sign_up_page.dart';
 import 'package:padilni/presentation/auth/verification/logic/verification_binding.dart';
 import 'package:padilni/presentation/auth/verification/verification_page.dart';
+import 'package:padilni/presentation/details_screen/details_screen.dart';
 import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
 import 'package:padilni/presentation/onboarding/onboarding_page.dart';
 import 'package:padilni/presentation/splashscreen/splash_screen.dart';
@@ -25,6 +27,8 @@ class AppRoutes {
 
   static const verificationCode = "/verification";
 
+  static const detailsScreen = '/details';
+
   static List<GetPage> appRoutes = [
     GetPage(name: base, page: () => SplashScreen()),
 
@@ -38,6 +42,10 @@ class AppRoutes {
 
     GetPage(name: signUp, page: ()=>SignUpPage(),binding: SignUpBinding()) ,
 
-    GetPage(name: verificationCode, page: ()=>VerificationPage() , binding: VerificationBinding())
+    GetPage(name: verificationCode, page: ()=>VerificationPage() , binding: VerificationBinding()) ,
+    
+    GetPage(name:detailsScreen , page: ()=> DetailsScreen())
+
+
   ];
 }

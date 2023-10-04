@@ -11,7 +11,8 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(title: Text("Profile".tr,
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600), 
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600 ,
+      fontSize: Get.width*0.05), 
       ), 
       centerTitle: true,  
       backgroundColor: Theme.of(context).scaffoldBackgroundColor, 
@@ -20,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
       body: Column( 
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [ 
-          GetHeight(height: Get.height*0.02), 
+          GetHeight(height: Get.height*0.005), 
 
           Center(
             child: CircleAvatar(radius: Get.width*0.17
@@ -45,7 +46,15 @@ class ProfileScreen extends StatelessWidget {
 
               GetHeight(height: Get.height*0.03),
 
-              CustomProfileItem()
+              CustomProfileItem(svgUrl: "assets/images/heart.svg",text: "favourites",) ,
+              GetHeight(height: Get.height*0.02),
+              CustomProfileItem(svgUrl: "assets/images/text.svg",text: "Languages",) , 
+               GetHeight(height: Get.height*0.02),
+              CustomProfileItem(svgUrl: "assets/images/notification.svg",text: "Notifications",) , 
+               GetHeight(height: Get.height*0.02),
+              CustomProfileItem(svgUrl: "assets/images/unlock_password.svg",text: "change password") , 
+
+
 
 
 

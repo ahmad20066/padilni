@@ -22,6 +22,8 @@ class AppColors
   static const Color googleColor = Color(0xffDD4B39);
 
   static const Color facebookColor = Color(0xff367FC0);
+  
+  static const Color settingItemColor = Color(0xffD8D8D8);
 
 
 }
