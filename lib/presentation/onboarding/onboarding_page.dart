@@ -37,10 +37,10 @@ int cnt = 0;
                   cnt= value;
                 });  },
              controller: controller,
-             children:const [ 
-                  CustomPageWidget(imagePath: "assets/images/onboarding1.png",),
-                  CustomPageWidget(imagePath: "assets/images/onboarding2.png",),
-                  CustomPageWidget(imagePath: "assets/images/onboarding3.jpg",) 
+             children: [ 
+                  CustomPageWidget(imagePath: "assets/images/onboarding1.png",height: Get.height*0.6,),
+                  CustomPageWidget(imagePath: "assets/images/onboarding2.png",height: Get.height*0.6,),
+                  CustomPageWidget(imagePath: "assets/images/onboarding3.jpg",height: Get.height*0.6,) 
              ],
          ),) , 
          Padding(

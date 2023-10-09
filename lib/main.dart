@@ -4,11 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/data/remote/diohelper.dart';
-import 'package:padilni/presentation/details_screen/details_screen.dart';
 import 'package:padilni/services/notification_config.dart';
 import 'package:padilni/utils/lang/translations.dart';
 import 'package:padilni/utils/local/shared.dart';
 import 'package:padilni/utils/routes/app_routes.dart';
+import 'package:padilni/presentation/splashscreen/splash_screen.dart';
 import 'package:padilni/utils/themes.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -58,6 +58,6 @@ class MyApp extends StatelessWidget {
             : Get.deviceLocale,
         fallbackLocale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
-        home: DetailsScreen());
+        home: SplashScreen());
   }
 }
