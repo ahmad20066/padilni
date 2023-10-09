@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:padilni/utils/colors.dart';
+import 'package:padilni/utils/widgets/get_width.dart';
 
 class CustomProfileItem extends StatelessWidget {
-  const CustomProfileItem({super.key});
-
+  const CustomProfileItem({super.key,
+  this.svgUrl,
+  this.text});
+ final String? svgUrl ;
+ final String? text; 
   @override
   Widget build(BuildContext context) {
     return SizedBox( 
@@ -25,6 +31,16 @@ class CustomProfileItem extends StatelessWidget {
                   ),
                   height: Get.height*0.1, 
                   width: Get.width*0.8,
+                  child: Padding(
+                    padding:  EdgeInsets.all(Get.width*0.025),
+                    child: Row(children: [
+                       CircleAvatar(radius: Get.width*0.06,
+                       backgroundColor: AppColors.settingItemColor,
+                       child: SvgPicture.asset(svgUrl!),) ,
+                       GetWidth(width: Get.width*0.05), 
+                       Text(text!)
+                        ]),
+                  ) ,
                 ),
               ],
             ),

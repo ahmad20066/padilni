@@ -18,11 +18,12 @@ class SignUpController extends GetxController {
       {required String email,
       required String password,
       required String name}) async {
-    setRequestStatus(RequestStatus.loading); 
+    setRequestStatus(RequestStatus.loading);
     Shared.setstring("email", email);
     UserModel userModel = UserModel(
         email: email,
         password: password,
+        notification_token: Shared.getstring("fcm_token")!,
         name: name,
         device_uuid: Shared.getstring("uuid")!);
     var response = await _authRepository.signUp(userModel);
@@ -32,7 +33,7 @@ class SignUpController extends GetxController {
       debugPrint("pravo");
 
       Get.toNamed("/verification");
-    } else { 
+    } else {
       print(response.errorMessage);
       setRequestStatus(RequestStatus.onerror);
       debugPrint("Not pravo");
@@ -63,26 +64,5 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<void> facebookRegister(
-      {required String email,
-      required String password,
-      required String name}) async {
-    setRequestStatus(RequestStatus.loading);
-    SocialLoginModel model = SocialLoginModel(
-        name: name,
-        email: email,
-        signup_method: "facebook",
-        social_id: 1,
-        device_type: Platform.isAndroid ? "android" : "ios",
-        device_uuid: Shared.getstring("uuid")!,
-        notification_token: "123");
-    var response = await AuthRepository().socialLogin(model);
-
-    if (response.success!) {
-      setRequestStatus(RequestStatus.success);
-      Get.toNamed("/verification");
-    } else {
-      setRequestStatus(RequestStatus.onerror);
-    }
-  }
+  
 }

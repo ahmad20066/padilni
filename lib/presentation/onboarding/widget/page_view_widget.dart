@@ -14,7 +14,7 @@ final String imagePath;
         children: [
           
             Container( 
-              height: Get.height*0.6,
+              height: Get.height*0.39,
               width: Get.width,
              decoration: BoxDecoration(
               color:AppColors.primaryColor,

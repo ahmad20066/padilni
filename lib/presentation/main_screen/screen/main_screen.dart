@@ -25,7 +25,7 @@ class MainScreen extends StatelessWidget {
           height: Get.height * 0.1,
           color: Colors.white,
           shape: const CircularNotchedRectangle(),
-          notchMargin: Get.width * 0.055,
+          notchMargin: Get.width * 0.05,
           child: Obx(
             () => Row(
               children: <Widget>[
