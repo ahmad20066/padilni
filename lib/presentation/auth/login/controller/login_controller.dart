@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:padilni/data/repositories/auth_repository.dart';
 import 'package:padilni/models/user/user_model.dart';
@@ -17,7 +19,7 @@ class LoginController extends GetxController {
 
   login(String email, String password) async {
     status(RequestStatus.loading);
-    final deviceType =deviceTypeSelected();
+    final deviceType = deviceTypeSelected();
 
     final model = UserModel(
         email: email,
@@ -25,10 +27,9 @@ class LoginController extends GetxController {
         device_type: deviceType,
         notification_token: Shared.getstring("fcm_token")!,
         device_uuid: Shared.getstring("uuid")!);
-      
+
     final appResponse = await _repo.login(model);
     if (appResponse.success!) {
-      
       Shared.setstring(
           "token", appResponse.data['data']['token_info']['access_token']);
       status(RequestStatus.success);
@@ -37,5 +38,17 @@ class LoginController extends GetxController {
       status(RequestStatus.onerror);
       Get.snackbar("Error Logging In", appResponse.errorMessage!);
     }
+  }
+
+  facebookLogin() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+    if (result.status == LoginStatus.success) {
+      // Create a credential from the access token
+      final OAuthCredential credential =
+          FacebookAuthProvider.credential(result.accessToken!.token);
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    }
+    return null;
   }
 }

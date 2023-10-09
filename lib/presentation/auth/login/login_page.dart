@@ -34,10 +34,11 @@ class LoginPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.07),
                 Center(
                   child: Text(
-                    "Log in with your email and password" ,
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      fontSize: Get.width*0.035
-                    ),
+                    "Log in with your email and password",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(fontSize: Get.width * 0.035),
                   ),
                 ),
                 GetHeight(height: Get.height * 0.03),
@@ -53,15 +54,17 @@ class LoginPage extends StatelessWidget {
                     return null;
                   },
                   controller: emailController,
-                  suffix: SvgPicture.asset("assets/images/email.svg",color: AppColors.seventhColor,
-                        width: Get.width*0.05,),
+                  suffix: SvgPicture.asset(
+                    "assets/images/email.svg",
+                    color: AppColors.seventhColor,
+                    width: Get.width * 0.05,
+                  ),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
                   hinttext: "Password",
-                  validator: (v) {  
-                    if(v!.isEmpty)
-                    {
+                  validator: (v) {
+                    if (v!.isEmpty) {
                       return "Please Enter a valid password";
                     }
                     return null;
@@ -106,10 +109,10 @@ class LoginPage extends StatelessWidget {
                           ? const Loader()
                           : CustomButton(
                               buttomColor: AppColors.fifthcolor,
-                              onpressed: () { 
-                                if(_formKey.currentState!.validate()){
-                                controller.login(emailController.text,
-                                    passwordController.text);
+                              onpressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  controller.login(emailController.text,
+                                      passwordController.text);
                                 }
                               },
                               child: Row(children: [
@@ -172,7 +175,9 @@ class LoginPage extends StatelessWidget {
                   width: Get.width * 0.87,
                   child: CustomButton(
                       buttomColor: AppColors.facebookColor,
-                      onpressed: () {},
+                      onpressed: () {
+                        controller.facebookLogin();
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
