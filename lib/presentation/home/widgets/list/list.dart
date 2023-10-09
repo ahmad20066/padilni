@@ -13,24 +13,24 @@ class ListGrid extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Expanded(
-            child: GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              itemCount: products.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 2,
-                  childAspectRatio: 0.9,
-                  crossAxisSpacing: Get.width * 0.03),
-              itemBuilder: (context, index) => ListItem(
-                product: products[index],
-              ),
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            itemCount: products.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 6,
+                childAspectRatio: 0.9,
+                crossAxisSpacing: Get.width * 0.03),
+            itemBuilder: (context, index) => ListItem(
+              product: products[index],
             ),
           ),
-        ), 
-        SizedBox(height: Get.height*0.1,)
+        ),
+        SizedBox(
+          height: Get.height * 0.1,
+        )
       ],
     );
   }

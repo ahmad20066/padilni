@@ -11,14 +11,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // ignore: must_be_immutable
 class OnBoardingPage extends StatefulWidget {
-   OnBoardingPage({super.key});
+  OnBoardingPage({super.key});
 
   @override
   State<OnBoardingPage> createState() => _OnBoardingPageState();
 }
+
 class _OnBoardingPageState extends State<OnBoardingPage> {
-var controller = PageController(initialPage: 0);
-int cnt = 0;
+  var controller = PageController(initialPage: 0);
+  int cnt = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
