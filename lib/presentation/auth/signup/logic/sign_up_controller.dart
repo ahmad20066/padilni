@@ -39,30 +39,4 @@ class SignUpController extends GetxController {
       debugPrint("Not pravo");
     }
   }
-
-  Future<void> googleRegister(
-      {required String email,
-      required String password,
-      required String name}) async {
-    setRequestStatus(RequestStatus.loading);
-    SocialLoginModel model = SocialLoginModel(
-        name: name,
-        email: email,
-        signup_method: "gmail",
-        social_id: 1,
-        device_type: Platform.isAndroid ? "android" : "ios",
-        device_uuid: Shared.getstring("uuid")!,
-        notification_token: "123");
-    var response = await AuthRepository().socialLogin(model);
-
-    if (response.success!) {
-      setRequestStatus(RequestStatus.success);
-
-      Get.toNamed("/verification");
-    } else {
-      setRequestStatus(RequestStatus.onerror);
-    }
-  }
-
-  
 }

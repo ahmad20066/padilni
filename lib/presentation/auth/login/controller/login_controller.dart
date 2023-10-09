@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:padilni/data/repositories/auth_repository.dart';
 import 'package:padilni/models/login/social_login.dart';
 import 'package:padilni/models/user/user_model.dart';
@@ -46,24 +47,27 @@ class LoginController extends GetxController {
 
   Future<void> facebookRegister(
       {required String email,
-      // required String password,
+      required String social_id,
       required String name}) async {
     setRequestStatus(RequestStatus.loading);
     SocialLoginModel model = SocialLoginModel(
         name: name,
         email: email,
         signup_method: "facebook",
-        social_id: 1,
+        social_id: social_id,
         device_type: Platform.isAndroid ? "android" : "ios",
         device_uuid: Shared.getstring("uuid")!,
         notification_token: "123");
     var response = await AuthRepository().socialLogin(model);
 
     if (response.success!) {
-      setRequestStatus(RequestStatus.success);
-      Get.toNamed("/verification");
+      Shared.setstring(
+          "token", response.data['data']['token_info']['access_token']);
+      status(RequestStatus.success);
+      Get.offAllNamed(AppRoutes.main);
     } else {
       setRequestStatus(RequestStatus.onerror);
+      Get.snackbar("Error Logging In", response.errorMessage!);
     }
   }
 
@@ -71,16 +75,18 @@ class LoginController extends GetxController {
     try {
       final LoginResult result = await FacebookAuth.instance
           .login(loginBehavior: LoginBehavior.webOnly);
-      print(result.message);
+      print(result);
       if (result.status == LoginStatus.success) {
         // Create a credential from the access token
         final OAuthCredential credential =
             FacebookAuthProvider.credential(result.accessToken!.token);
-        print(credential.toString());
+        print(credential.token);
         final userData = await FacebookAuth.instance.getUserData();
         print(userData);
         await facebookRegister(
-            email: userData['email'], name: userData['name']);
+            email: userData['email'],
+            name: userData['name'],
+            social_id: credential.token.toString());
         // Once signed in, return the UserCredential
 
         return await FirebaseAuth.instance.signInWithCredential(credential);
@@ -91,5 +97,56 @@ class LoginController extends GetxController {
       print('--------------');
       print(e.toString());
     }
+  }
+
+  Future<void> googleRegister(
+      {required String email,
+      required String social_id,
+      required String name}) async {
+    setRequestStatus(RequestStatus.loading);
+    SocialLoginModel model = SocialLoginModel(
+        name: name,
+        email: email,
+        signup_method: "gmail",
+        social_id: social_id,
+        device_type: Platform.isAndroid ? "android" : "ios",
+        device_uuid: Shared.getstring("uuid")!,
+        notification_token: "123");
+    var response = await AuthRepository().socialLogin(model);
+
+    if (response.success!) {
+      Shared.setstring(
+          "token", response.data['data']['token_info']['access_token']);
+      status(RequestStatus.success);
+      Get.offAllNamed(AppRoutes.main);
+
+      // Get.toNamed(App);
+    } else {
+      setRequestStatus(RequestStatus.onerror);
+      Get.snackbar("Error Logging In", response.errorMessage!);
+    }
+  }
+
+  Future<UserCredential> googlelogin() async {
+    // trigger the authentication flow :
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // obtain the auth details from the request :
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // create new credentials :
+    final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+    if (googleUser != null) {
+      await googleRegister(
+          email: googleUser!.email,
+          social_id: credential.token.toString(),
+          name: googleUser!.displayName!);
+    }
+
+    // once signed in :
+
+    return FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
