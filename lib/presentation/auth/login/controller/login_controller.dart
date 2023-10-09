@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:padilni/data/repositories/auth_repository.dart';
 import 'package:padilni/models/login/social_login.dart';
 import 'package:padilni/models/user/user_model.dart';
@@ -47,7 +47,8 @@ class LoginController extends GetxController {
   Future<void> facebookRegister(
       {required String email,
       // required String password,
-      required String name}) async {
+      required String name , 
+      required String social_id}) async {
     setRequestStatus(RequestStatus.loading);
     SocialLoginModel model = SocialLoginModel(
         name: name,
@@ -56,7 +57,7 @@ class LoginController extends GetxController {
         social_id: 1,
         device_type: Platform.isAndroid ? "android" : "ios",
         device_uuid: Shared.getstring("uuid")!,
-        notification_token: "123");
+        notification_token:  Shared.getstring("fcm_token")!);
     var response = await AuthRepository().socialLogin(model);
 
     if (response.success!) {
@@ -80,7 +81,9 @@ class LoginController extends GetxController {
         final userData = await FacebookAuth.instance.getUserData();
         print(userData);
         await facebookRegister(
-            email: userData['email'], name: userData['name']);
+            email: userData['email'],
+             name: userData['name'] ,
+             social_id: credential.token.toString() );
         // Once signed in, return the UserCredential
 
         return await FirebaseAuth.instance.signInWithCredential(credential);
@@ -91,5 +94,23 @@ class LoginController extends GetxController {
       print('--------------');
       print(e.toString());
     }
+  } 
+ Future<UserCredential>  googlelogin() async
+  { 
+    // trigger the authentication flow : 
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn(); 
+
+    // obtain the auth details from the request : 
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // create new credentials : 
+    final credintial = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken , 
+      idToken: googleAuth?.idToken 
+    ) ; 
+    // once signed in : 
+
+    return FirebaseAuth.instance.signInWithCredential(credintial); 
+  
   }
 }
