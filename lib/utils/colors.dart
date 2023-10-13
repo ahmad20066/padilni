@@ -25,5 +25,10 @@ class AppColors
   
   static const Color settingItemColor = Color(0xffD8D8D8);
 
+  static const Color exchangeColor =  Color(0xffF7F7F7); 
+
+  static const Color declineColor = Color(0xffFC6011);
+
+
 
 }
