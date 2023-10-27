@@ -12,7 +12,20 @@
           "package_name": "com.example.padilni"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "223667314680-gthopstjavorabj4t90hbb979ps9s94s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.padilni",
+            "certificate_hash": "985f166a0af4c7ea7464563a63f5b839aca1b4a2"
+          }
+        },
+        {
+          "client_id": "223667314680-si56l3fsdfgj0hiktk78i69nenbf238k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCYGsgCoo4AfFLNIxW2udVABYvik0Q9SlI"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223667314680-si56l3fsdfgj0hiktk78i69nenbf238k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "223667314680-e9g52l35fkoi4gs42r7n0neaeu9lrbqg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.padilni"
+              }
+            }
+          ]
         }
       }
     }

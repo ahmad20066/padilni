@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
@@ -57,7 +56,7 @@ class LoginController extends GetxController {
         social_id: social_id,
         device_type: Platform.isAndroid ? "android" : "ios",
         device_uuid: Shared.getstring("uuid")!,
-        notification_token: "123");
+        notification_token: Shared.getstring("fcm_token")!);
     var response = await AuthRepository().socialLogin(model);
 
     if (response.success!) {
@@ -115,8 +114,11 @@ class LoginController extends GetxController {
     var response = await AuthRepository().socialLogin(model);
 
     if (response.success!) {
+      print("----------------------");
+      print(response.data);
       Shared.setstring(
           "token", response.data['data']['token_info']['access_token']);
+      print(Shared.getstring("token"));
       status(RequestStatus.success);
       Get.offAllNamed(AppRoutes.main);
 
@@ -128,6 +130,8 @@ class LoginController extends GetxController {
   }
 
   Future<UserCredential> googlelogin() async {
+    // await GoogleSignIn().disconnect();
+    // await FirebaseAuth.instance.signOut();
     // trigger the authentication flow :
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 

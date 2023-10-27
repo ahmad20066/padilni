@@ -24,7 +24,7 @@ class ResetPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(text: "Reset Password"),
+      appBar: CustomAppBar(text: "Reset Password"),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -51,22 +51,21 @@ class ResetPasswordPage extends StatelessWidget {
               validator: (v) {
                 return;
               },
-              suffix:SvgPicture.asset( "assets/images/email.svg"),
+              suffix: SvgPicture.asset("assets/images/email.svg"),
             ),
             GetHeight(height: Get.height * 0.04),
             Obx(() =>
                 controller.forgotPasswordStatus.value == RequestStatus.success
                     ? Center(
-                        child: CustomPinPut(controller: pinPutController,
-                        validator: (val){
-
-                          if(val!.isEmpty && val.length!=4)
-                          {
+                        child: CustomPinPut(
+                        controller: pinPutController,
+                        validator: (val) {
+                          if (val!.isEmpty && val.length != 4) {
                             return "Enter valid PinPut";
-                          } 
-                          return null ;
-                        },)
-                      )
+                          }
+                          return null;
+                        },
+                      ))
                     : Container()),
             SizedBox(
               height: Get.height * 0.05,
@@ -109,7 +108,8 @@ class ResetPasswordPage extends StatelessWidget {
                               buttomColor: AppColors.fifthcolor,
                               onpressed: () {
                                 controller.forgotPasswordVerify(
-                                    emailController.text, pinPutController.text);
+                                    emailController.text,
+                                    pinPutController.text);
                               },
                               child: Row(children: [
                                 GetWidth(width: Get.width * 0.33),

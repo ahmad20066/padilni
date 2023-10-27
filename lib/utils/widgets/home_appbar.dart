@@ -4,7 +4,12 @@ import 'package:get/get.dart';
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
   final bool hasLeading;
-  const HomeAppbar({Key? key, required this.text, this.hasLeading = false})
+  final double height;
+  const HomeAppbar(
+      {Key? key,
+      required this.text,
+      this.hasLeading = false,
+      this.height = 0.2})
       : super(key: key);
 
   @override
@@ -30,5 +35,5 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(Get.height * 0.2);
+  Size get preferredSize => Size.fromHeight(Get.height * height);
 }

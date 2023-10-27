@@ -4,8 +4,12 @@ import 'package:get/get.dart';
 import '../../../utils/colors.dart';
 
 class CustomPageWidget extends StatelessWidget {
-  const CustomPageWidget({super.key,required this.imagePath});
+  const CustomPageWidget({
+    super.key,
+    required this.imagePath,
+    required this.height});
 final String imagePath;
+final double height ;
   @override
   Widget build(BuildContext context) {
     return  Padding(
@@ -14,7 +18,7 @@ final String imagePath;
         children: [
           
             Container( 
-              height: Get.height*0.39,
+              height: height,
               width: Get.width,
              decoration: BoxDecoration(
               color:AppColors.primaryColor,
