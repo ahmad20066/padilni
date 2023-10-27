@@ -20,7 +20,7 @@ class BodyContainer extends StatelessWidget {
       minChildSize: minSize,
       builder: (context, scrollController) {
         return Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               boxShadow: [
                 BoxShadow(
                     offset: Offset(0, -6), color: Color.fromRGBO(0, 0, 0, 0.16))

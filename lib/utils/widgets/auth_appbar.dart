@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.text});
-final String text; 
+  const CustomAppBar({super.key,
+   required this.text,this.showHomeIcon = true});
+final String text;  
+final bool showHomeIcon ;
   @override
   Widget build(BuildContext context) {
     return AppBar( 
@@ -17,13 +19,14 @@ final String text;
         Get.back();
       }, icon: const Icon(Icons.arrow_back,color: Colors.black,)),
       centerTitle: true, 
-      actions: [
+      actions: showHomeIcon == true ? [ 
+
         Padding(
           padding:  EdgeInsets.all(Get.width*0.03),
           child: const Icon(Icons.home,color: Colors.black,),
         ) 
         
-      ],
+      ] : null,
     );
   }
   

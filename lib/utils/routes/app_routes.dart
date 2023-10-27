@@ -11,7 +11,9 @@ import 'package:padilni/presentation/details_screen/details_screen.dart';
 import 'package:padilni/presentation/exchange/controller/exchange_binding.dart';
 import 'package:padilni/presentation/exchange/screen/cash_exchange.dart';
 import 'package:padilni/presentation/exchange/screen/exchange_screen.dart';
+import 'package:padilni/presentation/favourites/favourites_screen.dart';
 import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
+import 'package:padilni/presentation/notifications/notification_screen.dart';
 import 'package:padilni/presentation/onboarding/onboarding_page.dart';
 import 'package:padilni/presentation/splashscreen/splash_screen.dart';
 
@@ -34,9 +36,14 @@ class AppRoutes {
 
   static const exchangeScreenRoute = '/exchange_screen';
 
-  static const cashExchangeRoute = '/cash';
+  static const cashExchangeRoute = '/cash'; 
+
+  static const favouritesScreenRoute = '/favourites';
+
+  static const notificationScreenRoute ='/notifications';
 
   static List<GetPage> appRoutes = [
+
     GetPage(name: base, page: () => SplashScreen()),
 
     GetPage(name: main, page: () => MainScreen()),
@@ -55,7 +62,11 @@ class AppRoutes {
 
     GetPage(name: exchangeScreenRoute, page: ()=>ExchangeScreen() , binding: ExchangeBinding()),
 
-    GetPage(name: cashExchangeRoute, page: ()=>CashExchangeScreen()) 
+    GetPage(name: cashExchangeRoute, page: ()=>CashExchangeScreen())  ,
+
+    GetPage(name: favouritesScreenRoute, page: ()=>FavouritesScreen()) ,
+
+    GetPage(name: notificationScreenRoute, page: ()=>NotificationScreen())
 
 
 
