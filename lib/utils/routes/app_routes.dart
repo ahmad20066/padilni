@@ -8,6 +8,9 @@ import 'package:padilni/presentation/auth/signup/sign_up_page.dart';
 import 'package:padilni/presentation/auth/verification/logic/verification_binding.dart';
 import 'package:padilni/presentation/auth/verification/verification_page.dart';
 import 'package:padilni/presentation/details_screen/details_screen.dart';
+import 'package:padilni/presentation/exchange/controller/exchange_binding.dart';
+import 'package:padilni/presentation/exchange/screen/cash_exchange.dart';
+import 'package:padilni/presentation/exchange/screen/exchange_screen.dart';
 import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
 import 'package:padilni/presentation/my_items/screens/my_items_screen.dart';
 import 'package:padilni/presentation/onboarding/onboarding_page.dart';
@@ -33,6 +36,10 @@ class AppRoutes {
   static const myItemsScreen = '/my-items';
   static const myOrdersScreen = '/my-orders';
 
+  static const exchangeScreenRoute = '/exchange_screen';
+
+  static const cashExchangeRoute = '/cash';
+
   static List<GetPage> appRoutes = [
     GetPage(name: base, page: () => SplashScreen()),
     GetPage(name: myItemsScreen, page: () => MyItemsScreen()),
@@ -46,6 +53,11 @@ class AppRoutes {
         name: verificationCode,
         page: () => VerificationPage(),
         binding: VerificationBinding()),
-    GetPage(name: detailsScreen, page: () => DetailsScreen())
+    GetPage(name: detailsScreen, page: () => DetailsScreen()),
+    GetPage(
+        name: exchangeScreenRoute,
+        page: () => ExchangeScreen(),
+        binding: ExchangeBinding()),
+    GetPage(name: cashExchangeRoute, page: () => CashExchangeScreen())
   ];
 }
