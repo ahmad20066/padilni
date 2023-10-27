@@ -13,9 +13,9 @@ class MyItemsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: AddFloatingButton(onTap: () {}),
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         text: "My Items",
-        hasHomeIcon: false,
+        showHomeIcon: false,
       ),
       body: Stack(
         children: [
