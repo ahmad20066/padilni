@@ -5,51 +5,35 @@ import 'package:padilni/models/login/social_login.dart';
 import '../../models/app_response.dart';
 import '../../models/user/user_model.dart';
 
-class AuthRepository { 
-
-Future<AppResponse> signUp(UserModel model) async
-{   
-  try{
-    var appResponse = await DioHelper.post(url: SignUpApi , body: model.userRegisterToJson());
-       return AppResponse(
-        data: appResponse.data ,
-        success: true, 
-        errorMessage: null
-       ); 
-  } on DioException catch(e)
-  {   
-     return AppResponse(
-        data: null ,
-        success: false, 
-        errorMessage: e.message ?? e.toString()
-       ); 
-  }   
-
-}  
-
-Future<AppResponse> verifyEmailAddress(UserModel model) async
-{    
-  try{   
-
-     var appResponse = await DioHelper.post(url: verifyemail , body: model.userVerifyToJson()); 
-     return AppResponse(
-      success: true , 
-      errorMessage: null ,
-      data: appResponse.data
-     );
-  } on DioException catch (e)
-  {
+class AuthRepository {
+  Future<AppResponse> signUp(UserModel model) async {
+    try {
+      var appResponse = await DioHelper.post(
+          url: SignUpApi, body: model.userRegisterToJson());
       return AppResponse(
-        success: false ,
-        errorMessage: e.message ?? e.toString(),
-        data: null
-           );
+          data: appResponse.data, success: true, errorMessage: null);
+    } on DioException catch (e) {
+      return AppResponse(
+          data: null, success: false, errorMessage: e.message ?? e.toString());
+    }
   }
-}    
+
+  Future<AppResponse> verifyEmailAddress(UserModel model) async {
+    try {
+      var appResponse = await DioHelper.post(
+          url: verifyemail, body: model.userVerifyToJson());
+      return AppResponse(
+          success: true, errorMessage: null, data: appResponse.data);
+    } on DioException catch (e) {
+      return AppResponse(
+          success: false, errorMessage: e.message ?? e.toString(), data: null);
+    }
+  }
 
   Future<AppResponse> login(UserModel model) async {
     try {
-      final response = await DioHelper.post(url: loginUrl, body: model.loginToJSon());
+      final response =
+          await DioHelper.post(url: loginUrl, body: model.loginToJSon());
       return AppResponse(success: true, data: response.data);
     } on DioException catch (e) {
       return AppResponse(success: false, errorMessage: e.message);
@@ -77,11 +61,11 @@ Future<AppResponse> verifyEmailAddress(UserModel model) async
     }
   }
 
-  Future<AppResponse> forgotPasswordChange(
-      UserModel model, String code) async {
+  Future<AppResponse> forgotPasswordChange(UserModel model, String code) async {
     try {
       final response = await DioHelper.post(
-          url: forgotPasswordChangeUrl, body: {...model.loginToJSon(), "code": code});
+          url: forgotPasswordChangeUrl,
+          body: {...model.loginToJSon(), "code": code});
       return AppResponse(success: true, data: response.data);
     } on DioException catch (e) {
       return AppResponse(success: false, errorMessage: e.message);
@@ -90,12 +74,11 @@ Future<AppResponse> verifyEmailAddress(UserModel model) async
 
   Future<AppResponse> socialLogin(SocialLoginModel model) async {
     try {
-      final response = await DioHelper.post(
-          url: forgotPasswordChangeUrl, body: model.toMap());
+      final response =
+          await DioHelper.post(url: socialLoginUrl, body: model.toMap());
       return AppResponse(success: true, data: response.data);
     } on DioException catch (e) {
       return AppResponse(success: false, errorMessage: e.message);
     }
   }
-
 }

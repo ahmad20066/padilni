@@ -21,7 +21,7 @@ class NewPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(text: "New Password"),
+        appBar: CustomAppBar(text: "New Password"),
         body: Form(
           key: _formKey,
           child: SingleChildScrollView(

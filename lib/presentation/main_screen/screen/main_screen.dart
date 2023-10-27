@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:padilni/presentation/main_screen/controller/navbar_controller.dart';
 import 'package:padilni/utils/colors.dart';
+import 'package:padilni/utils/routes/app_routes.dart';
+import 'package:padilni/utils/widgets/add_floating_button.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
@@ -10,16 +12,9 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      floatingActionButton: SizedBox(
-        height: Get.height * 0.09,
-        child: FittedBox(
-          child: FloatingActionButton(
-            backgroundColor: AppColors.fifthcolor,
-            onPressed: () {},
-            child: Icon(Icons.add),
-          ),
-        ),
-      ),
+      floatingActionButton: AddFloatingButton(onTap: () {
+        Get.toNamed(AppRoutes.addItem);
+      }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
           height: Get.height * 0.1,

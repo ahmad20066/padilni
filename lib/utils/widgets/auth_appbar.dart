@@ -8,7 +8,7 @@ final String text;
 final bool showHomeIcon ;
   @override
   Widget build(BuildContext context) {
-    return AppBar( 
+    return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       elevation: 0,
       title: Text(text,style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -29,8 +29,8 @@ final bool showHomeIcon ;
       ] : null,
     );
   }
-  
+
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(Get.height*0.07);
+  Size get preferredSize => Size.fromHeight(Get.height * 0.07);
 }

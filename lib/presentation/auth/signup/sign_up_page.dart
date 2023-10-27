@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:padilni/presentation/auth/login/controller/login_controller.dart';
 import 'package:padilni/presentation/auth/signup/logic/sign_up_controller.dart';
 import 'package:padilni/presentation/auth/widgets/custom_row_button.dart';
 import 'package:padilni/utils/request_status.dart';
@@ -16,16 +17,16 @@ class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  var nameController  = TextEditingController();
+  var nameController = TextEditingController();
   var confirmPasswordController = TextEditingController();
-  var signUpKey = GlobalKey<FormState>(); 
+  var signUpKey = GlobalKey<FormState>();
 
   var signUpController = Get.find<SignUpController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(text: "Create Account"),
+        appBar: CustomAppBar(text: "Create Account"),
         body: SingleChildScrollView(
           child: Form(
             key: signUpKey,
@@ -42,16 +43,14 @@ class SignUpPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.03),
                 CustomFormField(
                   hinttext: "Name",
-                  validator: (v) { 
-                   if(v!.isEmpty)
-                    {
+                  validator: (v) {
+                    if (v!.isEmpty) {
                       return "required feild".tr;
-                    } 
-                   if(!GetUtils.isUsername(v))
-                    {
-                    return "unvalid username".tr;
                     }
-                    return  null;
+                    if (!GetUtils.isUsername(v)) {
+                      return "unvalid username".tr;
+                    }
+                    return null;
                   },
                   controller: nameController,
                   suffix: SvgPicture.asset("assets/images/person.svg"),
@@ -59,44 +58,38 @@ class SignUpPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
                   hinttext: "Email",
-                  validator: (v) { 
-                    if(v!.isEmpty)
-                    { 
+                  validator: (v) {
+                    if (v!.isEmpty) {
                       return "required feild".tr;
-                    } 
-                    if(!GetUtils.isEmail(v))
-                    {
+                    }
+                    if (!GetUtils.isEmail(v)) {
                       return "Invalid email address".tr;
-                    } 
+                    }
                     return null;
                   },
-
                   controller: emailController,
-                  suffix:SvgPicture.asset("assets/images/email.svg"),
+                  suffix: SvgPicture.asset("assets/images/email.svg"),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
                   hinttext: "Password",
-                  validator: (v) { 
-                  if(v!.isEmpty)
-                   {
-                    return "required feild".tr;
-                   }  
-                   return null;
+                  validator: (v) {
+                    if (v!.isEmpty) {
+                      return "required feild".tr;
+                    }
+                    return null;
                   },
-                  controller:passwordController,
-                  suffix:Icon(Icons.lock),
+                  controller: passwordController,
+                  suffix: Icon(Icons.lock),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
                   hinttext: "Confirm Password",
-                  validator: (v) { 
-                    if(v!.isEmpty)
-                    {
+                  validator: (v) {
+                    if (v!.isEmpty) {
                       return "required feild".tr;
-                    } 
-                    if(v.compareTo(passwordController.text)!=0)
-                    {
+                    }
+                    if (v.compareTo(passwordController.text) != 0) {
                       return "check the password again".tr;
                     }
                     return null;
@@ -108,38 +101,39 @@ class SignUpPage extends StatelessWidget {
                 SizedBox(
                   width: Get.width * 0.87,
                   child: Obx(
-                    ()=> signUpController.requeststatus.value == RequestStatus.loading ? 
-                    const Center(child: CircularProgressIndicator(),) :
-                     CustomButton(
-                        buttomColor: AppColors.fifthcolor,
-                        onpressed: () { 
-                          if(signUpKey.currentState!.validate())
-                          { 
-                           signUpController.
-                           userRegister(email: emailController.text,
-                            password: passwordController.text, 
-                            name: nameController.text)  ;                     
-                          } 
-                  
-                        },
-                        child: Row(children: [
-                          GetWidth(width: Get.width * 0.3),
-                          Text(
-                            "Sign Up",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(color: AppColors.primaryColor),
-                          ),
-                          GetWidth(width: Get.width * 0.14),
-                          SizedBox(
-                              height: Get.height * 0.026,
-                              child: const VerticalDivider(
-                                color: AppColors.seventhColor,
-                              )),
-                          GetWidth(width: Get.width * 0.025),
-                          SvgPicture.asset("assets/images/sign_up_icon.svg")
-                        ])),
+                    () => signUpController.requeststatus.value ==
+                            RequestStatus.loading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : CustomButton(
+                            buttomColor: AppColors.fifthcolor,
+                            onpressed: () {
+                              if (signUpKey.currentState!.validate()) {
+                                signUpController.userRegister(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    name: nameController.text);
+                              }
+                            },
+                            child: Row(children: [
+                              GetWidth(width: Get.width * 0.3),
+                              Text(
+                                "Sign Up",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: AppColors.primaryColor),
+                              ),
+                              GetWidth(width: Get.width * 0.14),
+                              SizedBox(
+                                  height: Get.height * 0.026,
+                                  child: const VerticalDivider(
+                                    color: AppColors.seventhColor,
+                                  )),
+                              GetWidth(width: Get.width * 0.025),
+                              SvgPicture.asset("assets/images/sign_up_icon.svg")
+                            ])),
                   ),
                 ),
                 GetHeight(height: Get.height * 0.07),
@@ -164,7 +158,9 @@ class SignUpPage extends StatelessWidget {
                   width: Get.width * 0.87,
                   child: CustomButton(
                       buttomColor: AppColors.facebookColor,
-                      onpressed: () {},
+                      onpressed: () {
+                        Get.find<LoginController>().facebookLogin();
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -185,7 +181,9 @@ class SignUpPage extends StatelessWidget {
                   width: Get.width * 0.87,
                   child: CustomButton(
                       buttomColor: AppColors.googleColor,
-                      onpressed: () {},
+                      onpressed: () {
+                        Get.find<LoginController>().googlelogin();
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

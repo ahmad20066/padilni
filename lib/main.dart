@@ -52,10 +52,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         theme: gettheme(context),
         getPages: AppRoutes.appRoutes,
-        translations: Translation(),
-        locale: Shared.getstring("lang") != null
-            ? Locale(Shared.getstring("lang")!)
-            : Get.deviceLocale,
+        // translations: Translation(),
+        // locale: Shared.getstring("lang") != null
+        //     ? Locale(Shared.getstring("lang")!)
+        //     : Get.deviceLocale,
         fallbackLocale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
         home: SplashScreen());

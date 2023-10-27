@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:padilni/models/product/product_model.dart';
 import 'package:padilni/utils/colors.dart';
+import 'package:padilni/utils/routes/app_routes.dart';
 import 'package:padilni/utils/widgets/triangle_button.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 
@@ -68,27 +69,36 @@ class ListItem extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-              alignment: Alignment(1, 1.2),
-              child: Container(
-                height: Get.height * 0.2,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 5,
-                      left: Get.width * 0.15,
-                      child: Chip(
-                          visualDensity: VisualDensity(vertical: -4),
-                          backgroundColor: AppColors.fifthcolor,
-                          label: Text(
-                            "exchange     ",
-                            style: TextStyle(color: Colors.white),
-                          )),
-                    ),
-                    Positioned(right: 0, bottom: 0, child: TriangleButton()),
-                  ],
-                ),
-              )),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRoutes.myItemsScreen);
+            },
+            child: Align(
+                alignment: Alignment(1, 1.2),
+                child: Container(
+                  height: Get.height * 0.2,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: 5,
+                        left: Get.width * 0.15,
+                        child: Chip(
+                            visualDensity:
+                                VisualDensity(vertical: -4, horizontal: -4),
+                            backgroundColor: AppColors.fifthcolor,
+                            label: Container(
+                              width: MediaQuery.of(context).size.width * 0.23,
+                              child: Text(
+                                "exchange",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )),
+                      ),
+                      Positioned(right: 0, bottom: 0, child: TriangleButton()),
+                    ],
+                  ),
+                )),
+          ),
         ],
       ),
     );

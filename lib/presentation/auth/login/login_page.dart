@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(text: "Login"),
+        appBar: CustomAppBar(text: "Login"),
         body: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -198,7 +198,9 @@ class LoginPage extends StatelessWidget {
                   width: Get.width * 0.87,
                   child: CustomButton(
                       buttomColor: AppColors.googleColor,
-                      onpressed: () {},
+                      onpressed: () {
+                        controller.googlelogin();
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

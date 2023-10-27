@@ -4,7 +4,7 @@ class SocialLoginModel {
   final String name;
   final String email;
   final String signup_method;
-  final int social_id;
+  final String social_id;
   final String device_type;
   final String device_uuid;
   final String notification_token;
