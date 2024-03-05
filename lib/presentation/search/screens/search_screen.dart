@@ -60,13 +60,13 @@ class SearchScreen extends StatelessWidget {
               GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: controller.products.length,
+                  itemCount: controller.items.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.9,
                       mainAxisSpacing: 6),
                   itemBuilder: (context, index) {
-                    return ListItem(product: controller.products[index]);
+                    return ListItem(item: controller.items[index]);
                   }),
             ],
           ),

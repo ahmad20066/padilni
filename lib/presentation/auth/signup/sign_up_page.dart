@@ -182,7 +182,7 @@ class SignUpPage extends StatelessWidget {
                   child: CustomButton(
                       buttomColor: AppColors.googleColor,
                       onpressed: () {
-                        Get.find<LoginController>().googlelogin();
+                        // Get.find<LoginController>().googlelogin();
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

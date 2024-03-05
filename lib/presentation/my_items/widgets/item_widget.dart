@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:padilni/models/product/product_model.dart';
+import 'package:padilni/models/item/item_model.dart';
+import 'package:padilni/presentation/my_items/controllers/my_items_controller.dart';
 import 'package:padilni/utils/colors.dart';
 
 class ItemWidget extends StatelessWidget {
-  final ProductModel product;
-  const ItemWidget({super.key, required this.product});
+  final ItemModel item;
+  const ItemWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,8 @@ class ItemWidget extends StatelessWidget {
           Container(
             // height: Get.height * 0.3,
             // width: Get.width,
-            child: Image.asset(
-              "assets/images/onboarding2.png",
+            child: Image.network(
+              item.main_image!,
               // height: Get.height * 0.15,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -37,8 +37,8 @@ class ItemWidget extends StatelessWidget {
                     width: Get.width * 0.1,
                   ),
                   Text(
-                    product.name,
-                    style: GoogleFonts.poppins(
+                    item.name!,
+                    style: TextStyle(
                         fontSize: 35,
                         color: Colors.white,
                         fontWeight: FontWeight.w500),
@@ -48,7 +48,7 @@ class ItemWidget extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     height: Get.height * 0.06,
                     width: Get.width * 0.35,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: AppColors.fifthcolor,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(40),
@@ -57,7 +57,7 @@ class ItemWidget extends StatelessWidget {
                       SizedBox(
                         width: Get.width * 0.05,
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         // radius: 30,
                         backgroundColor: Colors.white,
                         child: Icon(
@@ -68,12 +68,17 @@ class ItemWidget extends StatelessWidget {
                       SizedBox(
                         width: Get.width * 0.05,
                       ),
-                      CircleAvatar(
-                        // radius: 30,
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.delete_forever,
-                          color: Color.fromRGBO(74, 75, 77, 1),
+                      GestureDetector(
+                        onTap: () {
+                          Get.find<MyItemsController>().deleteItem(item.id);
+                        },
+                        child: const CircleAvatar(
+                          // radius: 30,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.delete_forever,
+                            color: Color.fromRGBO(74, 75, 77, 1),
+                          ),
                         ),
                       ),
                     ]),

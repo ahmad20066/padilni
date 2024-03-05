@@ -5,14 +5,17 @@ class AddTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   double? height = Get.height * 0.07;
+  TextInputType keyboardType;
   // int maxLines;
-  AddTextField({
-    Key? key,
-    required this.controller,
-    required this.hint,
-    this.height,
-    // this.maxLines = 1,
-  }) : super(key: key);
+  AddTextField(
+      {Key? key,
+      required this.controller,
+      required this.hint,
+      this.height,
+      this.keyboardType = TextInputType.name
+      // this.maxLines = 1,
+      })
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class AddTextField extends StatelessWidget {
       child: TextField(
         // maxLines: null,
         controller: controller,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: EdgeInsets.all(20),

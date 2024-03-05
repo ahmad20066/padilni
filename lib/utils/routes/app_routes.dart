@@ -13,6 +13,7 @@ import 'package:padilni/presentation/exchange/screen/cash_exchange.dart';
 import 'package:padilni/presentation/exchange/screen/exchange_screen.dart';
 import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
 import 'package:padilni/presentation/my_items/screens/my_items_screen.dart';
+import 'package:padilni/presentation/my_orders/screens/my_order_details_screen.dart';
 import 'package:padilni/presentation/onboarding/onboarding_page.dart';
 import 'package:padilni/presentation/splashscreen/splash_screen.dart';
 
@@ -39,9 +40,11 @@ class AppRoutes {
   static const exchangeScreenRoute = '/exchange_screen';
 
   static const cashExchangeRoute = '/cash';
+  static const myOrderDetailsRoute = '/my-order-details';
 
   static List<GetPage> appRoutes = [
     GetPage(name: base, page: () => SplashScreen()),
+    GetPage(name: myOrderDetailsRoute, page: () => MyOrderDetailsScreen()),
     GetPage(name: myItemsScreen, page: () => MyItemsScreen()),
     GetPage(name: addItem, page: () => AddItemScreen()),
     GetPage(name: main, page: () => MainScreen()),

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -24,7 +24,7 @@ class LoginController extends GetxController {
   login(String email, String password) async {
     status(RequestStatus.loading);
     final deviceType = deviceTypeSelected();
-
+    print(rememberMePressed.value);
     final model = UserModel(
         email: email,
         password: password,
@@ -34,12 +34,21 @@ class LoginController extends GetxController {
 
     final appResponse = await _repo.login(model);
     if (appResponse.success!) {
-      Shared.setstring(
-          "token", appResponse.data['data']['token_info']['access_token']);
+      Shared.setstring("token", appResponse.data['data']['access_token']);
+      if (rememberMePressed.isTrue) {
+        print("-----------");
+        Shared.setBool("rememberMe", true);
+      } else {
+        Shared.setBool("rememberMe", false);
+      }
+      print(Shared.getBool("rememberMe"));
       status(RequestStatus.success);
       Get.offAllNamed(AppRoutes.main);
     } else {
       status(RequestStatus.onerror);
+      if (appResponse.errorMessage!.contains("not verified")) {
+        Get.toNamed(AppRoutes.verificationCode, arguments: email);
+      }
       Get.snackbar("Error Logging In", appResponse.errorMessage!);
     }
   }
@@ -77,18 +86,18 @@ class LoginController extends GetxController {
       print(result);
       if (result.status == LoginStatus.success) {
         // Create a credential from the access token
-        final OAuthCredential credential =
-            FacebookAuthProvider.credential(result.accessToken!.token);
-        print(credential.token);
-        final userData = await FacebookAuth.instance.getUserData();
-        print(userData);
-        await facebookRegister(
-            email: userData['email'],
-            name: userData['name'],
-            social_id: credential.token.toString());
-        // Once signed in, return the UserCredential
+        // final OAuthCredential credential =
+        //     FacebookAuthProvider.credential(result.accessToken!.token);
+        // print(credential.token);
+        // final userData = await FacebookAuth.instance.getUserData();
+        // print(userData);
+        // await facebookRegister(
+        //     email: userData['email'],
+        //     name: userData['name'],
+        //     social_id: credential.token.toString());
+        // // Once signed in, return the UserCredential
 
-        return await FirebaseAuth.instance.signInWithCredential(credential);
+        // return await FirebaseAuth.instance.signInWithCredential(credential);
       }
 
       return null;
@@ -129,28 +138,28 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<UserCredential> googlelogin() async {
-    // await GoogleSignIn().disconnect();
-    // await FirebaseAuth.instance.signOut();
-    // trigger the authentication flow :
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  // Future<UserCredential> googlelogin() async {
+  //   // await GoogleSignIn().disconnect();
+  //   // await FirebaseAuth.instance.signOut();
+  //   // trigger the authentication flow :
+  //   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // obtain the auth details from the request :
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+  //   // obtain the auth details from the request :
+  //   final GoogleSignInAuthentication? googleAuth =
+  //       await googleUser?.authentication;
 
-    // create new credentials :
-    final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-    if (googleUser != null) {
-      await googleRegister(
-          email: googleUser!.email,
-          social_id: credential.token.toString(),
-          name: googleUser!.displayName!);
-    }
+  //   // create new credentials :
+  //   final credential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+  //   if (googleUser != null) {
+  //     await googleRegister(
+  //         email: googleUser!.email,
+  //         social_id: credential.token.toString(),
+  //         name: googleUser!.displayName!);
+  //   }
 
-    // once signed in :
+  //   // once signed in :
 
-    return FirebaseAuth.instance.signInWithCredential(credential);
-  }
+  //   return FirebaseAuth.instance.signInWithCredential(credential);
+  // }
 }

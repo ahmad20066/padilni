@@ -51,7 +51,7 @@ class VerificationPage extends StatelessWidget {
                     : CustomButton(
                         onpressed: () {
                           if (verifykey.currentState!.validate() &&
-                              verifyTextController.text.length == 4) {
+                              verifyTextController.text.length == 6) {
                             verifacationController.verifyemailAddress(
                                 code: verifyTextController.text);
                           }
@@ -67,14 +67,25 @@ class VerificationPage extends StatelessWidget {
               ),
               GetHeight(height: Get.height * 0.02),
               CustomRowButton(
-                  text1: "Didn't receive the OTP ?",
-                  text2: Text(
-                    "Resend",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: AppColors.secondaryColor),
-                  )),
+                  text1: "Didn't receive the OTP ?" + "   ",
+                  text2: InkWell(
+                      onTap: () {
+                        verifacationController.resendCode();
+                      },
+                      child: Obx(
+                        () => verifacationController.resendRequstStatus.value ==
+                                RequestStatus.loading
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : Text(
+                                "Resend",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(color: AppColors.secondaryColor),
+                              ),
+                      ))),
               Padding(
                   padding: EdgeInsets.all(Get.width * 0.08),
                   child: Image.asset("assets/images/verification_image.png"))

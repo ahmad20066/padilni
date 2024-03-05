@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:padilni/presentation/add_item/controllers/add_item_controller.dart';
+import 'package:padilni/presentation/add_item/widgets/image_circle.dart';
 import 'package:padilni/utils/colors.dart';
 import 'package:padilni/utils/widgets/custom_button.dart';
 
@@ -8,6 +10,7 @@ class ImagesContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<AddItemController>();
     return Container(
       height: Get.height * 0.65,
       width: double.infinity,
@@ -39,7 +42,8 @@ class ImagesContainer extends StatelessWidget {
                     height: Get.height * 0.2,
                     width: Get.width * 0.7,
                     decoration: BoxDecoration(
-                        color: AppColors.fifthcolor,
+                        color: Get.find<AddItemController>().color ??
+                            AppColors.fifthcolor,
                         borderRadius: BorderRadius.circular(20)),
                   ),
                 ),
@@ -71,35 +75,22 @@ class ImagesContainer extends StatelessWidget {
                   crossAxisSpacing: Get.width * 0.05,
                   mainAxisSpacing: Get.height * 0.03),
               itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.16),
-                            offset: Offset(0, 3),
-                            spreadRadius: 3,
-                            blurRadius: 3)
-                      ]),
-                  child: Text(
-                    "Add Image",
-                    textAlign: TextAlign.center,
-                  ),
-                );
+                return ImageCircle();
               }),
           SizedBox(
             height: Get.height * 0.05,
           ),
           CustomButton(
-              onpressed: () {},
+              onpressed: () {
+                !controller.isEdit
+                    ? controller.addItem()
+                    : controller.editItem();
+              },
+              buttomColor: controller.color ?? AppColors.fifthcolor,
               child: Text(
-                "Add Item",
-                style: TextStyle(color: Colors.white),
-              ),
-              buttomColor: AppColors.fifthcolor)
+                !controller.isEdit ? "Add Item" : "Edit Item",
+                style: const TextStyle(color: Colors.white),
+              ))
         ],
       ),
     );

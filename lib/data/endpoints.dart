@@ -1,9 +1,19 @@
-const String baseUrl = "https://padilni.mouaz-alkholy.com/api/";
+const String baseUrl = "https://badilni.houseofgeniuses.tech/api/v1/";
 
-const String SignUpApi = "signup";
-const String loginUrl = "login";
-const String forgotPasswordUrl = "forgetPassword";
-const String forgotPasswordChangeUrl = "forgetPasswordChange";
-const String verifyForgotPasswordUrl = "forgetPasswordVerifyCode";
-const String verifyemail = "verifyEmail";
+const String authApi = "auth";
+const String SignUpApi = "$authApi/signup";
+
+const String loginUrl = "$authApi/login";
+const String logoutUrl = "$authApi/logout";
+const String forgotPasswordUrl = "$authApi/forgetPassword";
+const String forgotPasswordChangeUrl = "$authApi/forgetPasswordChange";
+const String verifyForgotPasswordUrl = "$authApi/forgetPasswordVerifyCode";
+const String verifyemail = "$authApi/verifyEmail";
+const String resendCode = "$authApi/sendVerifyCode";
 const String socialLoginUrl = "socialLogin";
+const String myItemsUrl = "myItems";
+const String addItemUrl = "addItem";
+const String editItemUrl = "editItem";
+const String deleteItemUrl = "deleteItem";
+const String categoriesUrl = "categories";
+const String subCategoriesUrl = "subCategories";

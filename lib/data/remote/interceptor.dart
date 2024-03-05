@@ -27,8 +27,8 @@ class AppInterceptors extends Interceptor {
 
   @override
   Future onError(DioException err, ErrorInterceptorHandler handler) async {
-    print(err.error.toString());
-    String? error = err.response?.data['meta']['message'] ?? "wrong_request";
+    print(err.response);
+    String? error = err.response?.data['message'] ?? "wrong_request";
     return handler.next(
       DioException(
         requestOptions: err.requestOptions,

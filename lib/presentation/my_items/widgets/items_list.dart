@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:padilni/models/item/item_model.dart';
 
-import 'package:padilni/models/product/product_model.dart';
 import 'package:padilni/presentation/my_items/widgets/item_widget.dart';
 
 class ItemsList extends StatelessWidget {
-  List<ProductModel> products = [];
+  List<ItemModel> products = [];
   ItemsList({
     Key? key,
     required this.products,
@@ -18,7 +18,7 @@ class ItemsList extends StatelessWidget {
       itemCount: products.length,
       itemBuilder: (BuildContext context, int index) {
         return ItemWidget(
-          product: products[index],
+          item: products[index],
         );
       },
     );

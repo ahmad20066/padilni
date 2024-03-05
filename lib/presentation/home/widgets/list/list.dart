@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:padilni/models/product/product_model.dart';
+import 'package:padilni/models/item/item_model.dart';
 import 'package:padilni/presentation/home/widgets/list/list_item.dart';
 
 class ListGrid extends StatelessWidget {
-  final List<ProductModel> products;
-  const ListGrid({super.key, required this.products});
+  final List<ItemModel> items;
+  const ListGrid({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,14 @@ class ListGrid extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,
             shrinkWrap: true,
-            itemCount: products.length,
+            itemCount: items.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 6,
                 childAspectRatio: 0.9,
                 crossAxisSpacing: Get.width * 0.03),
             itemBuilder: (context, index) => ListItem(
-              product: products[index],
+              item: items[index],
             ),
           ),
         ),

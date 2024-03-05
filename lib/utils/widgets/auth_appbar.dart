@@ -3,7 +3,12 @@ import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   bool hasHomeIcon;
-  CustomAppBar({super.key, required this.text, this.hasHomeIcon = true});
+  bool hasLeading;
+  CustomAppBar(
+      {super.key,
+      required this.text,
+      this.hasHomeIcon = true,
+      this.hasLeading = true});
   final String text;
   @override
   Widget build(BuildContext context) {
@@ -17,14 +22,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             .bodyMedium!
             .copyWith(fontWeight: FontWeight.w500, fontSize: Get.width * 0.05),
       ),
-      leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-          )),
+      leading: hasLeading
+          ? IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ))
+          : null,
       centerTitle: true,
       actions: [
         if (hasHomeIcon)

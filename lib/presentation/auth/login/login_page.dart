@@ -18,13 +18,16 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  var loginController = Get.find<LoginController>();
+  var loginController = Get.put<LoginController>(LoginController());
   GlobalKey<FormState> _formKey = GlobalKey();
   final LoginController controller = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(text: "Login"),
+        appBar: CustomAppBar(
+          text: "Login",
+          hasLeading: false,
+        ),
         body: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -153,7 +156,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       )),
                 ),
-                GetHeight(height: Get.height * 0.09),
+                GetHeight(height: Get.height * 0.03),
                 Column(
                   children: [
                     Text(
@@ -170,7 +173,7 @@ class LoginPage extends StatelessWidget {
                             .copyWith(color: AppColors.fourthColor))
                   ],
                 ),
-                GetHeight(height: Get.height * 0.03),
+                GetHeight(height: Get.height * 0.02),
                 SizedBox(
                   width: Get.width * 0.87,
                   child: CustomButton(
@@ -199,7 +202,7 @@ class LoginPage extends StatelessWidget {
                   child: CustomButton(
                       buttomColor: AppColors.googleColor,
                       onpressed: () {
-                        controller.googlelogin();
+                        // controller.googlelogin();
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

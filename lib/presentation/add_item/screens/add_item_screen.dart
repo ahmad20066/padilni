@@ -14,9 +14,10 @@ class AddItemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppbar(
-        text: "Add Item",
+        text: controller.color == null ? "Add Item" : "Edit Item",
         height: 0.08,
         hasLeading: true,
+        color: controller.color,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -37,6 +38,15 @@ class AddItemScreen extends StatelessWidget {
             AddTextField(
               controller: controller.nameController,
               hint: "Item name",
+              height: Get.height * 0.07,
+            ),
+            SizedBox(
+              height: Get.height * 0.02,
+            ),
+            AddTextField(
+              controller: controller.priceController,
+              keyboardType: TextInputType.number,
+              hint: "Item price",
               height: Get.height * 0.07,
             ),
             SizedBox(

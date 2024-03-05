@@ -1,8 +1,13 @@
 import 'package:get/get.dart';
+import 'package:padilni/data/repositories/home_repository.dart';
 import 'package:padilni/models/banner/banner_model.dart';
 import 'package:padilni/models/categories/categories_model.dart';
+import 'package:padilni/utils/custom_dialogs.dart';
+import 'package:padilni/utils/request_status.dart';
 
 class HomeController extends GetxController {
+  Rx<RequestStatus> categoriesStatus = RequestStatus.begin.obs;
+  final HomeRepository _repo = HomeRepository();
   List<BannerModel> bannerItems = [
     BannerModel(
         id: 1,
@@ -20,4 +25,21 @@ class HomeController extends GetxController {
             "https://www.clipartmax.com/png/middle/197-1972391_take-away-drink-vector-soft-drink-silhouette.png",
         name: "Drinks")
   ];
+  getCategories() async {
+    categoriesStatus(RequestStatus.loading);
+    final appResponse = await _repo.getCategories();
+    if (appResponse.success!) {
+      categories = (appResponse.data as List)
+          .map((e) => CategoriesModel.fromMap(e))
+          .toList();
+      if (categories.isEmpty) {
+        categoriesStatus(RequestStatus.nodata);
+      } else {
+        categoriesStatus(RequestStatus.success);
+      }
+    } else {
+      categoriesStatus(RequestStatus.onerror);
+      CustomDialogs.errorToast(appResponse.errorMessage!);
+    }
+  }
 }

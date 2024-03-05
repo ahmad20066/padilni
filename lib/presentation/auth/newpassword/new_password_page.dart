@@ -39,7 +39,9 @@ class NewPasswordPage extends StatelessWidget {
                 CustomFormField(
                   hinttext: "Password",
                   validator: (v) {
-                    return;
+                    if (v!.isEmpty) {
+                      return "Password is required";
+                    }
                   },
                   controller: passwordController,
                   suffix: SvgPicture.asset("assets/images/unlock_password.svg"),

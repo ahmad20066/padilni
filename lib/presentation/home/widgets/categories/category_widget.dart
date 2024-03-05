@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 import 'package:padilni/models/categories/categories_model.dart';
 
@@ -26,7 +26,7 @@ class CategoryWidget extends StatelessWidget {
         ),
         Text(
           category.name,
-          style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey),
+          style: TextStyle(fontSize: 14, color: Colors.grey),
         )
       ],
     );

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:padilni/models/product/product_model.dart';
+import 'package:padilni/presentation/my_items/controllers/my_items_controller.dart';
 import 'package:padilni/presentation/my_items/widgets/items_list.dart';
+import 'package:padilni/utils/request_status.dart';
 import 'package:padilni/utils/widgets/add_floating_button.dart';
 import 'package:padilni/utils/widgets/auth_appbar.dart';
 import 'package:padilni/utils/widgets/custom_search_bar.dart';
+import 'package:padilni/utils/widgets/loader.dart';
+import 'package:padilni/utils/widgets/no_data.dart';
 
 class MyItemsScreen extends StatelessWidget {
   const MyItemsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final MyItemsController controller = Get.put(MyItemsController());
     return Scaffold(
       floatingActionButton: AddFloatingButton(onTap: () {}),
       appBar: CustomAppBar(
@@ -19,47 +23,21 @@ class MyItemsScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          ItemsList(products: [
-            ProductModel(
-                id: 1,
-                name: "Market",
-                image:
-                    "https://www.collinsdictionary.com/images/full/market_large_354703739_1000.jpg",
-                type: "Food"),
-            ProductModel(
-                id: 1,
-                name: "Box",
-                image:
-                    "https://www.tinyboxcompany.co.uk/media/catalog/product/F/M/FMKRCU_22.jpg?width=800&height=800&store=default&image-type=image",
-                type: "Stuff"),
-            ProductModel(
-                id: 1,
-                name: "Box",
-                image:
-                    "https://www.tinyboxcompany.co.uk/media/catalog/product/F/M/FMKRCU_22.jpg?width=800&height=800&store=default&image-type=image",
-                type: "Stuff"),
-            ProductModel(
-                id: 1,
-                name: "Box",
-                image:
-                    "https://www.tinyboxcompany.co.uk/media/catalog/product/F/M/FMKRCU_22.jpg?width=800&height=800&store=default&image-type=image",
-                type: "Stuff"),
-            ProductModel(
-                id: 1,
-                name: "Box",
-                image:
-                    "https://www.tinyboxcompany.co.uk/media/catalog/product/F/M/FMKRCU_22.jpg?width=800&height=800&store=default&image-type=image",
-                type: "Stuff"),
-            ProductModel(
-                id: 1,
-                name: "Box",
-                image:
-                    "https://www.tinyboxcompany.co.uk/media/catalog/product/F/M/FMKRCU_22.jpg?width=800&height=800&store=default&image-type=image",
-                type: "Stuff"),
-          ]),
+          Obx(() {
+            switch (controller.status.value) {
+              case RequestStatus.loading:
+                return Loader();
+              case RequestStatus.success:
+                return ItemsList(products: controller.myItems);
+              case RequestStatus.nodata:
+                return NoData();
+              default:
+                return Container();
+            }
+          }),
           Container(
             height: Get.height * 0.17,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                       color: Color.fromRGBO(0, 0, 0, 0.16),

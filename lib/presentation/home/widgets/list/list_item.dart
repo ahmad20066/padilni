@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:padilni/models/product/product_model.dart';
+import 'package:padilni/models/item/item_model.dart';
 import 'package:padilni/utils/colors.dart';
 import 'package:padilni/utils/routes/app_routes.dart';
 import 'package:padilni/utils/widgets/triangle_button.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 
 class ListItem extends StatelessWidget {
-  final ProductModel product;
-  const ListItem({super.key, required this.product});
+  final ItemModel item;
+  const ListItem({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +41,15 @@ class ListItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        product.name,
-                        style: GoogleFonts.poppins(
+                        item.name!,
+                        style: TextStyle(
                             fontSize: Get.width * 0.04,
                             fontWeight: FontWeight.w500),
                       ),
                       Spacer(),
                       Text(
-                        product.type,
-                        style: GoogleFonts.poppins(fontSize: Get.width * 0.025),
+                        "item.type",
+                        style: TextStyle(fontSize: Get.width * 0.025),
                       ),
                     ],
                   ),
@@ -61,7 +60,7 @@ class ListItem extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "30\$",
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
                           color: Colors.purple, fontSize: Get.width * 0.031),
                     ),
                   )
@@ -90,7 +89,9 @@ class ListItem extends StatelessWidget {
                               width: MediaQuery.of(context).size.width * 0.23,
                               child: Text(
                                 "exchange",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Get.width * 0.03),
                               ),
                             )),
                       ),

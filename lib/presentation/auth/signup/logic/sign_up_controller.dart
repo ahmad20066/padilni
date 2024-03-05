@@ -6,6 +6,7 @@ import 'package:padilni/data/repositories/auth_repository.dart';
 import 'package:padilni/models/login/social_login.dart';
 import 'package:padilni/models/user/user_model.dart';
 import 'package:padilni/utils/request_status.dart';
+import 'package:padilni/utils/widgets/custom_toasts.dart';
 
 class SignUpController extends GetxController {
   final AuthRepository _authRepository = AuthRepository();
@@ -21,22 +22,22 @@ class SignUpController extends GetxController {
     setRequestStatus(RequestStatus.loading);
     Shared.setstring("email", email);
     UserModel userModel = UserModel(
-        email: email,
-        password: password,
-        notification_token: Shared.getstring("fcm_token")!,
-        name: name,
-        device_uuid: Shared.getstring("uuid")!);
+      email: email,
+      password: password,
+      // notification_token: Shared.getstring("fcm_token")!,
+      name: name,
+      // device_uuid: Shared.getstring("uuid")!
+    );
     var response = await _authRepository.signUp(userModel);
 
     if (response.success!) {
       setRequestStatus(RequestStatus.success);
       debugPrint("pravo");
 
-      Get.toNamed("/verification");
+      Get.toNamed("/verification", arguments: email);
     } else {
-      print(response.errorMessage);
       setRequestStatus(RequestStatus.onerror);
-      debugPrint("Not pravo");
+      CustomToasts.ErrorDialog(response.errorMessage!);
     }
   }
 }

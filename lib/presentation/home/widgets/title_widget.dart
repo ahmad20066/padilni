@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 class TitleWidget extends StatelessWidget {
   final String title;
@@ -15,8 +15,7 @@ class TitleWidget extends StatelessWidget {
           alignment: AlignmentDirectional(-0.8, 1),
           child: Text(
             title,
-            style:
-                GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
         ),
         Divider(

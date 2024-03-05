@@ -13,7 +13,9 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       floatingActionButton: AddFloatingButton(onTap: () {
-        Get.toNamed(AppRoutes.addItem);
+        Get.toNamed(
+          AppRoutes.addItem,
+        );
       }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(

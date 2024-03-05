@@ -10,34 +10,29 @@ import 'package:padilni/utils/widgets/success_dialog.dart';
 
 class NewPasswordController extends GetxController {
   String? email;
-  String? code;
   Rx<RequestStatus> status = RequestStatus.begin.obs;
-  
+
   final AuthRepository _repo = AuthRepository();
   @override
   void onInit() {
     email = Get.arguments['email'];
-    code = Get.arguments['code'];
     super.onInit();
   }
 
   changePassword(String password) async {
     status(RequestStatus.loading);
-    final deviceType = Platform.isAndroid ? "android" : "ios";
-    print(email);
     final model = UserModel(
-        email: email!,
-        password: password,
-        device_type: deviceType,
-        device_uuid: Shared.getstring("uuid"),
-        notification_token: Shared.getstring("fcm_token")!);
-    final appResponse = await _repo.forgotPasswordChange(model, code!);
+      email: email!,
+      password: password,
+      // device_type: deviceType,
+      // device_uuid: Shared.getstring("uuid"),
+      // notification_token: Shared.getstring("fcm_token")!
+    );
+    final appResponse = await _repo.forgotPasswordChange(model);
     if (appResponse.success!) {
-      Shared.setstring(
-          "token", appResponse.data['data']['token_info']['access_token']);
       status(RequestStatus.success);
       await successDialog("Password Changed Successfully");
-      Get.offAllNamed(AppRoutes.main);
+      Get.offAllNamed(AppRoutes.login);
     } else {
       Get.snackbar("Error", appResponse.errorMessage!);
       status(RequestStatus.onerror);

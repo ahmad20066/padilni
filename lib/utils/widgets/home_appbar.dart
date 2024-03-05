@@ -5,9 +5,11 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
   final bool hasLeading;
   final double height;
+  final Color? color;
   const HomeAppbar(
       {Key? key,
       required this.text,
+      this.color,
       this.hasLeading = false,
       this.height = 0.2})
       : super(key: key);
@@ -15,13 +17,16 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 0,
+      backgroundColor: color,
       automaticallyImplyLeading: hasLeading,
       title: Text(
         text,
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontWeight: FontWeight.w600,
+            color: color != Colors.transparent
+                ? Colors.white
+                : Color.fromRGBO(84, 85, 87, 0.8)),
       ),
       centerTitle: true,
       // actions: [
