@@ -57,7 +57,8 @@ class ItemInfo extends StatelessWidget {
           ),
           buildInfoRow("title".tr, item!.title),
           buildInfoRow("category".tr, item!.category ?? " "),
-          buildInfoRow("description".tr, item!.description),
+          if (item!.description != null)
+            buildInfoRow("description".tr, item!.description!),
           SizedBox(
             height: 30.h,
           )

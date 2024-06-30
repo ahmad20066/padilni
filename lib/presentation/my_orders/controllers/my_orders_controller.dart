@@ -3,6 +3,7 @@ import 'package:padilni/data/repositories/items_repository.dart';
 import 'package:padilni/models/order/order_model.dart';
 import 'package:padilni/utils/custom_dialogs.dart';
 import 'package:padilni/utils/request_status.dart';
+import 'package:padilni/utils/routes/app_routes.dart';
 import 'package:padilni/utils/widgets/custom_toasts.dart';
 
 class MyOrdersController extends GetxController {
@@ -18,6 +19,17 @@ class MyOrdersController extends GetxController {
     if (appResponse.success!) {
       orders =
           (appResponse.data as List).map((e) => OrderModel.fromMap(e)).toList();
+      int? id = Get.arguments?['id'];
+
+      if (id != null) {
+        if (orders.any((element) => element.id == id)) {
+          Get.toNamed(AppRoutes.myOrderDetailsRoute, arguments: {
+            "order": orders.firstWhere((element) => element.id == id),
+            "isSend": false,
+            "isChat": Get.arguments['isChat']
+          });
+        }
+      }
       if (orders.isEmpty) {
         offerStatus(RequestStatus.nodata);
       } else {
@@ -35,6 +47,19 @@ class MyOrdersController extends GetxController {
     if (appResponse.success!) {
       sentOrders =
           (appResponse.data as List).map((e) => OrderModel.fromMap(e)).toList();
+      int? id = Get.arguments?['id'];
+      print("------------");
+      print(id);
+
+      if (id != null) {
+        if (sentOrders.any((element) => element.id == id)) {
+          Get.toNamed(AppRoutes.myOrderDetailsRoute, arguments: {
+            "order": sentOrders.firstWhere((element) => element.id == id),
+            "isSend": true,
+            "isChat": Get.arguments['isChat']
+          });
+        }
+      }
       if (sentOrders.isEmpty) {
         sentOfferStatus(RequestStatus.nodata);
       } else {
@@ -60,8 +85,10 @@ class MyOrdersController extends GetxController {
 
   @override
   void onInit() {
+    print(Get.arguments);
     getMyOrders();
     getSentOrders();
+
     super.onInit();
   }
 }

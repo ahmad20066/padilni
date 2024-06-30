@@ -94,9 +94,10 @@ class DetailsScreen extends StatelessWidget {
                             ],
                           ),
                           GetHeight(height: Get.height * 0.02),
-                          Text(
-                            controller.item!.description,
-                          ),
+                          if (controller.item!.description != null)
+                            Text(
+                              controller.item!.description!,
+                            ),
                           // Spacer(),
 
                           SizedBox(

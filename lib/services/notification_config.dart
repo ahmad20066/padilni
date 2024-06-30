@@ -2,9 +2,19 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:padilni/data/local/sharedhelper.dart';
+import 'package:padilni/presentation/main_screen/controller/navbar_controller.dart';
+import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
+import 'package:padilni/presentation/my_orders/controllers/my_orders_controller.dart';
+import 'package:padilni/presentation/my_orders/screens/my_order_details_screen.dart';
 
-Future<void> handleBackgroundMessage(RemoteMessage message) async {}
+import '../utils/routes/app_routes.dart';
+
+Future<void> handleBackgroundMessage(RemoteMessage message) async {
+  print("****************");
+  print(message.data);
+}
 
 class NotificationConfig {
   final _firebaseMessaging = FirebaseMessaging.instance;
@@ -32,6 +42,25 @@ class NotificationConfig {
     if (message == null) {
       return;
     }
+    String type = message!.data['type'];
+    if (type == "exchange" || type == 'accept_exchange' || type == "message") {
+      final arguments = {
+        "id": int.parse(message.data['exchange_id']),
+        "isChat": type == "message"
+      };
+      if (Get.isRegistered<MyOrdersController>()) {
+        final orderscontroller = Get.find<MyOrdersController>();
+        Get.to(() => MainScreen(), arguments: arguments);
+        Get.find<NavbarController>().currentIndex.value = 2;
+        if (type == "exchange") {
+          orderscontroller.getMyOrders();
+          orderscontroller.getSentOrders();
+        }
+      } else {
+        Get.to(() => MainScreen(), arguments: arguments);
+        Get.find<NavbarController>().currentIndex.value = 2;
+      }
+    }
   }
 
   Future initPushNotification() async {
@@ -42,10 +71,13 @@ class NotificationConfig {
     FirebaseMessaging.onMessageOpenedApp.listen(handlemessage);
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
     FirebaseMessaging.onMessage.listen((event) {
+      print(event.toMap());
       final notification = event.notification;
+
       if (notification == null) {
         return;
       }
+
       _localNotification.show(
           notification.hashCode,
           notification.title,

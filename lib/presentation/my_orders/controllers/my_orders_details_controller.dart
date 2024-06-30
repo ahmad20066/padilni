@@ -6,6 +6,7 @@ import 'package:padilni/models/order/order_model.dart';
 import 'package:padilni/presentation/my_orders/controllers/my_orders_controller.dart';
 import 'package:padilni/utils/colors.dart';
 import 'package:padilni/utils/request_status.dart';
+import 'package:padilni/utils/routes/app_routes.dart';
 import 'package:padilni/utils/widgets/custom_toasts.dart';
 
 class MyOrdersDetailsController extends GetxController {
@@ -93,6 +94,12 @@ class MyOrdersDetailsController extends GetxController {
   void onInit() {
     order = Get.arguments['order'];
     isSend = Get.arguments['isSend'];
+    if (Get.arguments['isChat'] == true) {
+      Future.delayed(Duration(seconds: 1), () {
+        Get.toNamed(AppRoutes.chatRoute,
+            arguments: {'order': order, 'isSend': isSend});
+      });
+    }
     super.onInit();
   }
 }

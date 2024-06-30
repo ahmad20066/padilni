@@ -52,10 +52,10 @@ class AddItemController extends GetxController {
       countries = (appResponse.data as List)
           .map((e) => CountryModel.fromMap(e))
           .toList();
-      if (isEdit) {
+      if (isEdit && editedItem!.area_id != null) {
         selectCountry(editedItem!.country_id!);
         selectCity(editedItem!.city_id!);
-        selecArea(editedItem!.area_id);
+        selecArea(editedItem!.area_id!);
       }
       update();
     } else {
@@ -122,13 +122,17 @@ class AddItemController extends GetxController {
     ItemModel addedItem = ItemModel(
       // sub_category_id: selectedsubCategoryId.value!,
       status: selectedState.value,
-      area_id: selectedArea.value!.id,
+      area_id: selectedArea.value?.id,
       id: 1,
       title: nameController.text,
-      description: descriptionController.text,
+      description: descriptionController.text.isEmpty
+          ? null
+          : descriptionController.text,
       category_id: selectedsubCategoryId.value!,
       images: images,
-      price: double.parse(priceController.text),
+      price: priceController.text.isEmpty
+          ? null
+          : double.parse(priceController.text),
     );
     final appResponse = await _repo.addItem(addedItem);
     if (appResponse.success!) {
@@ -144,15 +148,19 @@ class AddItemController extends GetxController {
   editItem() async {
     status(RequestStatus.loading);
     ItemModel item = ItemModel(
-      // sub_category_id: selectedsubCategoryId.v,
+      // sub_category_id: selectedsubCategoryId.value!,
       status: selectedState.value,
-      area_id: selectedArea.value!.id,
-      id: editedItem!.id,
+      area_id: selectedArea.value?.id,
+      id: 1,
       title: nameController.text,
-      description: descriptionController.text,
+      description: descriptionController.text.isEmpty
+          ? null
+          : descriptionController.text,
       category_id: selectedsubCategoryId.value!,
-      images: editImages,
-      price: double.parse(priceController.text),
+      images: images,
+      price: priceController.text.isEmpty
+          ? null
+          : double.parse(priceController.text),
     );
 
     final appResponse = await _repo.editItem(item);

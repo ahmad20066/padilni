@@ -9,10 +9,10 @@ class ItemModel {
   int? sub_category_id;
   String status;
   String title;
-  String description;
-  double price;
+  String? description;
+  double? price;
   List<AddImage> images;
-  int area_id;
+  int? area_id;
   int? country_id;
   int? city_id;
   String? category;
