@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:padilni/data/repositories/items_repository.dart';
-import 'package:padilni/models/item/item_model.dart';
+import 'package:padilni/models/item_model/add_item_model.dart';
 import 'package:padilni/utils/custom_dialogs.dart';
 import 'package:padilni/utils/request_status.dart';
 
@@ -27,16 +27,22 @@ class MyItemsController extends GetxController {
   }
 
   deleteItem(int itemId) async {
-    //TODO: show dialog alert
     deleteStatus(RequestStatus.loading);
     final appResponse = await _repo.deleteItem(itemId);
     if (appResponse.success!) {
       deleteStatus(RequestStatus.success);
       myItems.removeWhere((element) => element.id == itemId);
+      update();
       CustomDialogs.successToast("Item Deleted Successfully");
     } else {
       deleteStatus(RequestStatus.onerror);
       CustomDialogs.errorToast(appResponse.errorMessage!);
     }
+  }
+
+  @override
+  void onInit() {
+    getMyItems();
+    super.onInit();
   }
 }

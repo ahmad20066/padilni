@@ -74,6 +74,24 @@ class DioHelper {
     );
   }
 
+  static Future<Response> delete({
+    required String url,
+    Map<String, dynamic>? query,
+    Map<String, dynamic>? body,
+    String? token = "",
+  }) async {
+    dio!.options.headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': token != "" ? " Bearer $token" : "",
+    };
+    return await dio!.delete(
+      url,
+      queryParameters: query,
+      data: body,
+    );
+  }
+
   static Future<Response> put({
     required String url,
     Map<String, dynamic>? query,

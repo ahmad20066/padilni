@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NoData extends StatelessWidget {
   const NoData({super.key});
@@ -7,7 +8,7 @@ class NoData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        "No Data",
+        "no_Data".tr,
         style: Theme.of(context).textTheme.bodyLarge,
       ),
     );

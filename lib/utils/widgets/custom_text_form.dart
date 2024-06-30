@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:padilni/utils/colors.dart';
 import 'package:padilni/utils/widgets/get_width.dart';
@@ -10,67 +11,59 @@ class CustomFormField extends StatelessWidget {
       required this.controller,
       required this.validator,
       this.onChanged,
-      this.suffix});
+      this.onTap,
+      this.type,
+      this.suffix,
+      this.obscure = false,
+      this.prefix});
   final String hinttext;
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final Widget? suffix;
+  final Widget? prefix;
+  final TextInputType? type;
   final onChanged;
+  final onTap;
+  final bool obscure;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(Get.width * 0.07, Get.height * 0.005,
-          Get.width * 0.07, Get.width * 0.005),
-      child: Container(
-        decoration: BoxDecoration(
-            color: AppColors.sixthcolor,
-            borderRadius: BorderRadius.circular(Get.width * 0.07)),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(
-          Get.width*0.055 ,
-          Get.width * 0.015,
-          Get.width*0.015 ,
-          Get.width*0.02 
-          ),
-          child: Row(
-            children: [
-              Flexible(
-                child: TextFormField(
-                    onChanged: onChanged,
-                    controller: controller,
-                    validator: validator,
-                    style: TextStyle(fontSize: Get.width * 0.04),
-                    decoration: InputDecoration(
-                      hintText: hinttext,
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: AppColors.eighthColor , fontSize: Get.width*0.04),
-                      border: InputBorder.none,
-                    )),
-              ),
-              SizedBox(
-                width: Get.width * 0.2,
-                child: Padding(
-                  padding: EdgeInsets.all(Get.width * 0.02),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                          height: Get.height * 0.03,
-                          child: const VerticalDivider(
-                            color: AppColors.seventhColor,
-                          )), 
-                          GetWidth(width: Get.width*0.005),
-                      suffix!
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.h),
+      // height: 74.h,
+      width: 361.w,
+      child: TextFormField(
+          readOnly: onTap != null,
+          keyboardType: type,
+          onTap: onTap,
+          onChanged: onChanged,
+          controller: controller,
+          obscureText: obscure,
+          validator: validator,
+          style: TextStyle(fontSize: 15.sp),
+          decoration: InputDecoration(
+              isDense: true,
+              prefixIcon: prefix,
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+              filled: true,
+              fillColor: AppColors.sixthcolor,
+              errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(28)),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(28)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(28)),
+              hintText: hinttext,
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: AppColors.eighthColor, fontSize: 15.sp),
+              border: InputBorder.none,
+              suffixIcon: suffix)),
     );
   }
 }

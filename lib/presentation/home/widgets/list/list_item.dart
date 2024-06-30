@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:padilni/models/item/item_model.dart';
+import 'package:padilni/data/endpoints.dart';
+import 'package:padilni/models/item_model/add_item_model.dart';
+import 'package:padilni/presentation/wishlist/controllers/wishlist_controller.dart';
 import 'package:padilni/utils/colors.dart';
 import 'package:padilni/utils/routes/app_routes.dart';
 import 'package:padilni/utils/widgets/triangle_button.dart';
@@ -12,95 +16,119 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: Get.height * 0.13,
-      child: Stack(
-        children: [
-          Card(
-            surfaceTintColor: Colors.white,
-            semanticContainer: false,
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(Get.width * 0.025)),
-            elevation: 6,
-            child: Padding(
-              padding: EdgeInsets.all(Get.width * 0.02),
-              child: Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10)),
-                    child: Image.asset(
-                      "assets/images/onboarding2.png",
-                      height: Get.height * 0.15,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        item.name!,
-                        style: TextStyle(
-                            fontSize: Get.width * 0.04,
-                            fontWeight: FontWeight.w500),
+    // print(item.status);
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(AppRoutes.detailsScreen, arguments: {
+          "id": item.id,
+          "fromWishlist": false,
+        });
+      },
+      child: SizedBox(
+        // alignment: Alignment.center,
+        height: 224.h,
+        width: 168.w,
+        child: Stack(
+          alignment: Alignment.center,
+          // fit: StackFit.passthrough,
+          children: [
+            Card(
+              surfaceTintColor: Colors.white,
+              semanticContainer: false,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Get.width * 0.025)),
+              elevation: 6,
+              child: Container(
+                height: 164.h,
+                width: 158.w,
+                // padding: EdgeInsets.all(Get.width * 0.02),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)),
+                      child: Image.network(
+                        imagesBaseUrl + item.images.first.image!,
+                        height: 87.h,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
                       ),
-                      Spacer(),
-                      Text(
-                        "item.type",
-                        style: TextStyle(fontSize: Get.width * 0.025),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: Get.height * 0.01,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "30\$",
-                      style: TextStyle(
-                          color: Colors.purple, fontSize: Get.width * 0.031),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Text(
+                          item.title!,
+                          style: TextStyle(
+                              fontSize: Get.width * 0.04,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Spacer(),
+                        Text(
+                          item.status,
+                          style: TextStyle(fontSize: Get.width * 0.025),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.toNamed(AppRoutes.myItemsScreen);
-            },
-            child: Align(
-                alignment: Alignment(1, 1.2),
+            Positioned(
+                right: -20.w,
+                bottom: 0.w,
+                // alignment: Alignment(1, 0.3),
+                // width: 200.w,
                 child: Container(
-                  height: Get.height * 0.2,
+                  height: 40.h,
+                  width: 158.w,
                   child: Stack(
                     children: [
                       Positioned(
-                        bottom: 5,
-                        left: Get.width * 0.15,
-                        child: Chip(
-                            visualDensity:
-                                VisualDensity(vertical: -4, horizontal: -4),
-                            backgroundColor: AppColors.fifthcolor,
-                            label: Container(
-                              width: MediaQuery.of(context).size.width * 0.23,
-                              child: Text(
-                                "exchange",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: Get.width * 0.03),
-                              ),
-                            )),
+                        bottom: 12.h,
+                        right: 40.w,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 19.h,
+                          width: 80.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: AppColors.secondaryColor,
+                          ),
+                          child: Text(
+                            "exchange".tr,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 10.sp),
+                          ),
+                        ),
                       ),
-                      Positioned(right: 0, bottom: 0, child: TriangleButton()),
+                      GetBuilder<WishListController>(
+                          init: WishListController(),
+                          builder: (_) {
+                            return Positioned(
+                                right: 25.w,
+                                bottom: 5.h,
+                                child: TriangleButton(
+                                  isFavorite: Get.find<WishListController>()
+                                      .checkIfFavorite(item.id),
+                                  onTap: () {
+                                    Get.find<WishListController>()
+                                        .addToFavorites(item);
+                                  },
+                                ));
+                          }),
                     ],
                   ),
                 )),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

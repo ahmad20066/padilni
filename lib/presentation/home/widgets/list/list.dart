@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:padilni/models/item/item_model.dart';
+import 'package:padilni/models/item_model/add_item_model.dart';
 import 'package:padilni/presentation/home/widgets/list/list_item.dart';
 
 class ListGrid extends StatelessWidget {
@@ -20,16 +21,16 @@ class ListGrid extends StatelessWidget {
             itemCount: items.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 6,
-                childAspectRatio: 0.9,
-                crossAxisSpacing: Get.width * 0.03),
+                // mainAxisSpacing: 20.h,
+                childAspectRatio: 1.2,
+                crossAxisSpacing: 5.w),
             itemBuilder: (context, index) => ListItem(
               item: items[index],
             ),
           ),
         ),
         SizedBox(
-          height: Get.height * 0.1,
+          height: 50.h,
         )
       ],
     );

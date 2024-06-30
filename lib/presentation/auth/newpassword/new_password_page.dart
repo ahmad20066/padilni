@@ -21,7 +21,7 @@ class NewPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(text: "New Password"),
+        appBar: CustomAppBar(text: "new_password".tr),
         body: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -31,16 +31,16 @@ class NewPasswordPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.07),
                 Center(
                   child: Text(
-                    "Please enter your new password",
+                    "enter_new_password".tr,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
                 GetHeight(height: Get.height * 0.03),
                 CustomFormField(
-                  hinttext: "Password",
+                  hinttext: "password".tr,
                   validator: (v) {
                     if (v!.isEmpty) {
-                      return "Password is required";
+                      return "required_field".tr;
                     }
                   },
                   controller: passwordController,
@@ -48,10 +48,10 @@ class NewPasswordPage extends StatelessWidget {
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
-                  hinttext: "Confirm Password",
+                  hinttext: "confirm_password".tr,
                   validator: (v) {
                     if (passwordController.text != v) {
-                      return "Passwords don`t match";
+                      return "check_the_password_again".tr;
                     }
 
                     return null;
@@ -76,7 +76,7 @@ class NewPasswordPage extends StatelessWidget {
                               child: Row(children: [
                                 GetWidth(width: Get.width * 0.3),
                                 Text(
-                                  "Confirm",
+                                  "confirm".tr,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!

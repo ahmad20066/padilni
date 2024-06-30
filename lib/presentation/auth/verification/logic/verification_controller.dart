@@ -49,6 +49,7 @@ class VerifacationController extends GetxController {
 
     if (response.success!) {
       changeRequestStatus(RequestStatus.success);
+      Shared.setstring("token", response.data['data']['token']);
       Get.offAllNamed("/main");
     } else if (!response.success!) {
       print(response.errorMessage);

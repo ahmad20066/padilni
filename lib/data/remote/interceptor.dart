@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:padilni/data/local/sharedhelper.dart';
+import 'package:padilni/utils/routes/app_routes.dart';
+import 'package:padilni/utils/widgets/custom_toasts.dart';
 
 import '../endpoints.dart';
 
@@ -28,7 +31,24 @@ class AppInterceptors extends Interceptor {
   @override
   Future onError(DioException err, ErrorInterceptorHandler handler) async {
     print(err.response);
+    print(err.message);
+    print(err.error);
     String? error = err.response?.data['message'] ?? "wrong_request";
+    if (err.response?.statusCode == 401) {
+      print("zzzz");
+      if (Get.currentRoute != AppRoutes.login) {
+        Shared.setstring("token", "");
+        Get.offAllNamed(AppRoutes.login);
+
+        return handler.next(
+          DioException(
+            requestOptions: err.requestOptions,
+            message: "relogin",
+          ),
+        );
+      }
+      // CustomToasts.ErrorDialog("relogin".tr);
+    }
     return handler.next(
       DioException(
         requestOptions: err.requestOptions,

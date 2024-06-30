@@ -9,19 +9,46 @@ class HomeRepository {
     try {
       final response = await DioHelper.get(
           url: categoriesUrl, token: Shared.getstring("token")!);
-      return AppResponse(success: true, data: response.data);
+      return AppResponse(success: true, data: response.data['data']);
     } on DioException catch (e) {
       return AppResponse(success: false, errorMessage: e.message);
     }
   }
 
-  Future<AppResponse> getSubCategories(int categoryId) async {
+  Future<AppResponse> getHomeInfo() async {
     try {
       final response = await DioHelper.get(
-          url: subCategoriesUrl,
+          url: homeInfoUrl, token: Shared.getstring("token")!);
+      print(response.data);
+      return AppResponse(success: true, data: response.data['data']);
+    } on DioException catch (e) {
+      return AppResponse(success: false, errorMessage: e.message);
+    }
+  }
+
+  Future<AppResponse> getHomeItems(int sectionId) async {
+    try {
+      final response = await DioHelper.get(
+          url: homeitemsUrl,
           token: Shared.getstring("token")!,
-          query: {"category_id": categoryId});
-      return AppResponse(success: true, data: response.data);
+          query: {
+            "section_id": sectionId,
+            'page': "home",
+          });
+      print(response.data);
+      return AppResponse(success: true, data: response.data['data']);
+    } on DioException catch (e) {
+      return AppResponse(success: false, errorMessage: e.message);
+    }
+  }
+
+  Future<AppResponse> getBanner() async {
+    try {
+      final response = await DioHelper.get(
+          url: bannerUrl, token: Shared.getstring("token")!);
+      print("***********");
+      print(response.data);
+      return AppResponse(success: true, data: response.data['data']);
     } on DioException catch (e) {
       return AppResponse(success: false, errorMessage: e.message);
     }

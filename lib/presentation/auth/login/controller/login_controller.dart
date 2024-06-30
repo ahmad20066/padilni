@@ -13,6 +13,7 @@ import 'package:padilni/utils/routes/app_routes.dart';
 
 class LoginController extends GetxController {
   RxBool rememberMePressed = false.obs;
+  RxBool passwordObscure = true.obs;
   Rx<RequestStatus> status = RequestStatus.begin.obs;
   setRequestStatus(RequestStatus reqstatus) => status.value = reqstatus;
 
@@ -25,6 +26,7 @@ class LoginController extends GetxController {
     status(RequestStatus.loading);
     final deviceType = deviceTypeSelected();
     print(rememberMePressed.value);
+
     final model = UserModel(
         email: email,
         password: password,

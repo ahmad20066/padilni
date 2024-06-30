@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:padilni/utils/colors.dart';
 
@@ -15,25 +16,28 @@ class MyOrdersTabbar extends StatelessWidget {
       tabs: [
         Tab(
           child: SizedBox(
-            width: Get.width * 0.25,
+            width: 150.w,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const ImageIcon(
                   AssetImage("assets/icons/recieved.png"),
                 ),
                 SizedBox(
-                  width: Get.width * 0.02,
+                  width: 5.w,
                 ),
-                const Text(
-                  "Recieved",
+                Text(
+                  "received".tr,
+                  style:
+                      TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w500),
                 ),
               ],
             ),
           ),
         ),
         Tab(
-          child: SizedBox(
-            width: Get.width * 0.25,
+          child: Container(
+            width: 150.w,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -41,10 +45,12 @@ class MyOrdersTabbar extends StatelessWidget {
                   Icons.send,
                 ),
                 SizedBox(
-                  width: Get.width * 0.03,
+                  width: 5.w,
                 ),
-                const Text(
-                  "Sent",
+                Text(
+                  "sent".tr,
+                  style:
+                      TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w500),
                 ),
               ],
             ),

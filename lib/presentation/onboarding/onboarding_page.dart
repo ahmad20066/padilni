@@ -110,7 +110,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             duration: const Duration(milliseconds: 7),
                             curve: Curves.easeInOutBack);
                       },
-                      padding: EdgeInsets.fromLTRB(0, 0, Get.width * 0.13, 0),
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     ),
                   ],
                 )

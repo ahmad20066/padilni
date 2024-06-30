@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BodyContainer extends StatelessWidget {
   final List<Widget> children;
@@ -20,6 +21,7 @@ class BodyContainer extends StatelessWidget {
       minChildSize: minSize,
       builder: (context, scrollController) {
         return Container(
+          // padding: REdgeInsets.only(bottom: 100.h),
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:padilni/presentation/my_items/controllers/my_items_controller.dart';
 import 'package:padilni/presentation/my_items/widgets/items_list.dart';
 import 'package:padilni/utils/request_status.dart';
+import 'package:padilni/utils/routes/app_routes.dart';
 import 'package:padilni/utils/widgets/add_floating_button.dart';
 import 'package:padilni/utils/widgets/auth_appbar.dart';
 import 'package:padilni/utils/widgets/custom_search_bar.dart';
@@ -16,7 +18,9 @@ class MyItemsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final MyItemsController controller = Get.put(MyItemsController());
     return Scaffold(
-      floatingActionButton: AddFloatingButton(onTap: () {}),
+      // floatingActionButton: AddFloatingButton(onTap: () {
+      //   Get.toNamed(AppRoutes.addItem);
+      // }),
       appBar: CustomAppBar(
         text: "My Items",
         hasHomeIcon: false,
@@ -28,7 +32,9 @@ class MyItemsScreen extends StatelessWidget {
               case RequestStatus.loading:
                 return Loader();
               case RequestStatus.success:
-                return ItemsList(products: controller.myItems);
+                return GetBuilder<MyItemsController>(builder: (context) {
+                  return ItemsList(products: controller.myItems);
+                });
               case RequestStatus.nodata:
                 return NoData();
               default:
@@ -36,7 +42,7 @@ class MyItemsScreen extends StatelessWidget {
             }
           }),
           Container(
-            height: Get.height * 0.17,
+            height: 80.h,
             decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -48,14 +54,6 @@ class MyItemsScreen extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(42),
                     bottomRight: Radius.circular(42))),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomSearchBar(
-                  onChanged: (v) {},
-                ),
-              ],
-            ),
           )
         ],
       ),

@@ -5,10 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:padilni/data/remote/diohelper.dart';
-import 'package:padilni/presentation/auth/login/login_page.dart';
-import 'package:padilni/presentation/auth/signup/sign_up_page.dart';
-import 'package:padilni/presentation/exchange/screen/exchange_screen.dart';
-import 'package:padilni/presentation/main_screen/screen/main_screen.dart';
 import 'package:padilni/presentation/splashscreen/splash_screen.dart';
 import 'package:padilni/services/notification_config.dart';
 import 'package:padilni/utils/lang/translations.dart';
@@ -33,6 +29,9 @@ Future<void> main() async {
   await DioHelper.init();
   NotificationConfig config = NotificationConfig();
   await Shared.init();
+  if (Shared.getstring("lang") == null) {
+    Shared.setstring("lang", Get.deviceLocale!.languageCode);
+  }
 
   await config.initNotification();
   if (Shared.getstring("uuid") == null) {
@@ -60,10 +59,8 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
           theme: gettheme(context),
           getPages: AppRoutes.appRoutes,
-          // translations: Translation(),
-          // locale: Shared.getstring("lang") != null
-          //     ? Locale(Shared.getstring("lang")!)
-          //     : Get.deviceLocale,
+          translations: Translation(),
+          locale: Locale(Shared.getstring("lang")!),
           fallbackLocale: const Locale('ar'),
           debugShowCheckedModeBanner: false,
           home: SplashScreen()),

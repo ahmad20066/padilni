@@ -22,7 +22,7 @@ class VerificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(text: "Verification"),
+      appBar: CustomAppBar(text: "verification".tr),
       body: SingleChildScrollView(
         child: Form(
           key: verifykey,
@@ -32,7 +32,7 @@ class VerificationPage extends StatelessWidget {
               GetHeight(height: Get.height * 0.06),
               Center(
                 child: Text(
-                  "Please enter your verification code ",
+                  "enter_verification".tr,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
@@ -58,7 +58,7 @@ class VerificationPage extends StatelessWidget {
                         },
                         buttomColor: AppColors.secondaryColor,
                         child: Text(
-                          "Verify",
+                          "verify".tr,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -67,7 +67,7 @@ class VerificationPage extends StatelessWidget {
               ),
               GetHeight(height: Get.height * 0.02),
               CustomRowButton(
-                  text1: "Didn't receive the OTP ?" + "   ",
+                  text1: "didnt_recieve".tr + "   ",
                   text2: InkWell(
                       onTap: () {
                         verifacationController.resendCode();
@@ -79,7 +79,7 @@ class VerificationPage extends StatelessWidget {
                                 child: CircularProgressIndicator(),
                               )
                             : Text(
-                                "Resend",
+                                "resend".tr,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!

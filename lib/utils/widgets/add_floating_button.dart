@@ -14,6 +14,7 @@ class AddFloatingButton extends StatelessWidget {
         child: FloatingActionButton(
           backgroundColor: AppColors.fifthcolor,
           onPressed: onTap,
+          shape: CircleBorder(),
           child: Icon(Icons.add),
         ),
       ),

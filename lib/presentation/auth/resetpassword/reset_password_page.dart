@@ -24,29 +24,21 @@ class ResetPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(text: "Reset Password"),
+      appBar: CustomAppBar(text: "reset_password".tr),
       body: SingleChildScrollView(
         child: Column(
           children: [
             GetHeight(height: Get.height * 0.06),
-            Center(
-              child: Column(
-                children: [
-                  Text(
-                    "Please enter your email to receive a ",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  Text("link to create a new password via email",
-                      style: Theme.of(context).textTheme.bodySmall)
-                ],
-              ),
+            Text(
+              "please_enter_email".tr,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             GetHeight(height: Get.height * 0.01),
             CustomFormField(
               onChanged: (v) {
                 controller.forgotPasswordStatus.value = RequestStatus.begin;
               },
-              hinttext: "Your Email",
+              hinttext: "email".tr,
               controller: emailController,
               validator: (v) {
                 return;
@@ -85,7 +77,7 @@ class ResetPasswordPage extends StatelessWidget {
                           child: Row(children: [
                             GetWidth(width: Get.width * 0.33),
                             Text(
-                              "Send",
+                              "send".tr,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium!
@@ -114,7 +106,7 @@ class ResetPasswordPage extends StatelessWidget {
                               child: Row(children: [
                                 GetWidth(width: Get.width * 0.33),
                                 Text(
-                                  "Verify",
+                                  "verify".tr,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
@@ -141,7 +133,7 @@ class ResetPasswordPage extends StatelessWidget {
                           child: Row(children: [
                             GetWidth(width: Get.width * 0.33),
                             Text(
-                              "Send",
+                              "send".tr,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium!

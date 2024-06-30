@@ -6,10 +6,12 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   final bool hasLeading;
   final double height;
   final Color? color;
+  final Color? iconColor;
   const HomeAppbar(
       {Key? key,
       required this.text,
       this.color,
+      this.iconColor,
       this.hasLeading = false,
       this.height = 0.2})
       : super(key: key);
@@ -17,6 +19,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      iconTheme: IconThemeData(color: iconColor),
       elevation: 0,
       backgroundColor: color,
       automaticallyImplyLeading: hasLeading,

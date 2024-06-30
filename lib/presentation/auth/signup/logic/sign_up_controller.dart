@@ -10,7 +10,8 @@ import 'package:padilni/utils/widgets/custom_toasts.dart';
 
 class SignUpController extends GetxController {
   final AuthRepository _authRepository = AuthRepository();
-
+  RxBool passwordObscure = true.obs;
+  RxBool confirmPasswordObscure = true.obs;
   var requeststatus = RequestStatus.begin.obs;
 
   setRequestStatus(RequestStatus status) => requeststatus.value = status;
@@ -18,12 +19,14 @@ class SignUpController extends GetxController {
   Future<void> userRegister(
       {required String email,
       required String password,
+      required String phone,
       required String name}) async {
     setRequestStatus(RequestStatus.loading);
     Shared.setstring("email", email);
     UserModel userModel = UserModel(
       email: email,
       password: password,
+      phone: phone,
       // notification_token: Shared.getstring("fcm_token")!,
       name: name,
       // device_uuid: Shared.getstring("uuid")!

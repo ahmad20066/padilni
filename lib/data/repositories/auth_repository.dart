@@ -112,4 +112,33 @@ class AuthRepository {
       return AppResponse(success: false, errorMessage: e.message);
     }
   }
+
+  Future<AppResponse> getProfile() async {
+    try {
+      final response = await DioHelper.get(
+          url: profileUrl, token: Shared.getstring("token")!);
+      print("----------");
+      print(response.data);
+      return AppResponse(success: true, data: response.data['data']);
+    } on DioException catch (e) {
+      return AppResponse(success: false, errorMessage: e.message);
+    }
+  }
+
+  Future<AppResponse> changePassword(String current, String newPassword) async {
+    try {
+      final response = await DioHelper.post(
+          url: changePasswordUrl,
+          token: Shared.getstring("token"),
+          body: {
+            "new_password": newPassword,
+            "current_password": current,
+            "device_uuid": Shared.getstring("uuid")
+          });
+      print(response.data);
+      return AppResponse(success: true, data: response.data);
+    } on DioException catch (e) {
+      return AppResponse(success: false, errorMessage: e.message);
+    }
+  }
 }

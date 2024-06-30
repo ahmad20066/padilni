@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:padilni/models/item/item_model.dart';
+import 'package:padilni/models/item_model/add_item_model.dart';
 
 import 'package:padilni/presentation/my_items/widgets/item_widget.dart';
 

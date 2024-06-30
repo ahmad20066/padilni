@@ -1,0 +1,4 @@
+enum ExchangeTypeEnum {
+  cash,
+  change;
+}

@@ -1,32 +1,25 @@
 import 'dart:convert';
 
+import 'package:padilni/models/categories/sub_category_model.dart';
+
 class CategoriesModel {
   final int id;
   final String image;
-  final String name;
+  final String title;
+  // final List<SubCategoryModel> sub_categories;
   CategoriesModel({
     required this.id,
     required this.image,
-    required this.name,
+    required this.title,
+    // required this.sub_categories,
   });
-
-  CategoriesModel copyWith({
-    int? id,
-    String? image,
-    String? name,
-  }) {
-    return CategoriesModel(
-      id: id ?? this.id,
-      image: image ?? this.image,
-      name: name ?? this.name,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'image': image,
-      'name': name,
+      'title': title,
+      // 'sub_categories': sub_categories.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -34,7 +27,9 @@ class CategoriesModel {
     return CategoriesModel(
       id: map['id']?.toInt() ?? 0,
       image: map['image'] ?? '',
-      name: map['name'] ?? '',
+      title: map['title'] ?? '',
+      // sub_categories: List<SubCategoryModel>.from(
+      //     map['sub_categories']?.map((x) => SubCategoryModel.fromMap(x))),
     );
   }
 
@@ -44,7 +39,7 @@ class CategoriesModel {
       CategoriesModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'CategoriesModel(id: $id, image: $image, name: $name)';
+  String toString() => 'CategoriesModel(id: $id, image: $image, title: $title)';
 
   @override
   bool operator ==(Object other) {
@@ -53,9 +48,9 @@ class CategoriesModel {
     return other is CategoriesModel &&
         other.id == id &&
         other.image == image &&
-        other.name == name;
+        other.title == title;
   }
 
   @override
-  int get hashCode => id.hashCode ^ image.hashCode ^ name.hashCode;
+  int get hashCode => id.hashCode ^ image.hashCode ^ title.hashCode;
 }

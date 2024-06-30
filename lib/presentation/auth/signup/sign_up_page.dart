@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:padilni/presentation/auth/login/controller/login_controller.dart';
@@ -16,6 +17,7 @@ import '../../../utils/colors.dart';
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
   var emailController = TextEditingController();
+  var phoneController = TextEditingController();
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
   var confirmPasswordController = TextEditingController();
@@ -26,7 +28,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(text: "Create Account"),
+        appBar: CustomAppBar(text: "signup".tr),
         body: SingleChildScrollView(
           child: Form(
             key: signUpKey,
@@ -36,67 +38,124 @@ class SignUpPage extends StatelessWidget {
                 GetHeight(height: Get.height * 0.05),
                 Center(
                   child: Text(
-                    "Add your details to sign up",
+                    "add_details".tr,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
                 GetHeight(height: Get.height * 0.03),
                 CustomFormField(
-                  hinttext: "Name",
+                  hinttext: "name".tr,
                   validator: (v) {
                     if (v!.isEmpty) {
-                      return "required feild".tr;
+                      return "required_field".tr;
                     }
                     if (!GetUtils.isUsername(v)) {
-                      return "unvalid username".tr;
+                      return "invalid_username".tr;
                     }
                     return null;
                   },
                   controller: nameController,
-                  suffix: SvgPicture.asset("assets/images/person.svg"),
+                  // suffix: SvgPicture.asset("assets/images/person.svg"),
+                  suffix: Icon(
+                    Icons.person,
+                    size: 19.sp,
+                  ),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
-                  hinttext: "Email",
+                  hinttext: "email".tr,
                   validator: (v) {
                     if (v!.isEmpty) {
-                      return "required feild".tr;
+                      return "required_field".tr;
                     }
                     if (!GetUtils.isEmail(v)) {
-                      return "Invalid email address".tr;
+                      return "email_valid".tr;
                     }
                     return null;
                   },
                   controller: emailController,
-                  suffix: SvgPicture.asset("assets/images/email.svg"),
+                  // suffix: SvgPicture.asset("assets/images/email.svg"),
+                  suffix: Icon(
+                    Icons.email,
+                    size: 19.sp,
+                  ),
                 ),
                 GetHeight(height: Get.height * 0.01),
                 CustomFormField(
-                  hinttext: "Password",
+                  hinttext: "phone".tr,
                   validator: (v) {
                     if (v!.isEmpty) {
-                      return "required feild".tr;
+                      return "required_field".tr;
+                    }
+                    if (!GetUtils.isPhoneNumber(v)) {
+                      return "phone_valid".tr;
                     }
                     return null;
                   },
-                  controller: passwordController,
-                  suffix: Icon(Icons.lock),
+                  controller: phoneController,
+                  // suffix: SvgPicture.asset("assets/images/email.svg"),
+                  type: TextInputType.number,
+                  suffix: Icon(
+                    Icons.phone,
+                    size: 19.sp,
+                  ),
                 ),
                 GetHeight(height: Get.height * 0.01),
-                CustomFormField(
-                  hinttext: "Confirm Password",
-                  validator: (v) {
-                    if (v!.isEmpty) {
-                      return "required feild".tr;
-                    }
-                    if (v.compareTo(passwordController.text) != 0) {
-                      return "check the password again".tr;
-                    }
-                    return null;
-                  },
-                  controller: confirmPasswordController,
-                  suffix: const Icon(Icons.lock),
+                Obx(
+                  () => CustomFormField(
+                      obscure: signUpController.passwordObscure.value,
+                      hinttext: "password".tr,
+                      validator: (v) {
+                        if (v!.isEmpty) {
+                          return "password_valid".tr;
+                        }
+                        return null;
+                      },
+                      controller: passwordController,
+                      suffix: IconButton(
+                          onPressed: () {
+                            signUpController.passwordObscure.value =
+                                !signUpController.passwordObscure.value;
+                          },
+                          icon: signUpController.passwordObscure.isTrue
+                              ? Icon(
+                                  Icons.visibility_off,
+                                  size: 19.sp,
+                                )
+                              : Icon(
+                                  Icons.visibility,
+                                  size: 19.sp,
+                                ))),
                 ),
+                GetHeight(height: Get.height * 0.01),
+                Obx(() => CustomFormField(
+                      obscure: signUpController.confirmPasswordObscure.value,
+                      suffix: IconButton(
+                          onPressed: () {
+                            signUpController.confirmPasswordObscure.value =
+                                !signUpController.confirmPasswordObscure.value;
+                          },
+                          icon: signUpController.confirmPasswordObscure.isTrue
+                              ? Icon(
+                                  Icons.visibility_off,
+                                  size: 19.sp,
+                                )
+                              : Icon(
+                                  Icons.visibility,
+                                  size: 19.sp,
+                                )),
+                      hinttext: "confirm_password".tr,
+                      validator: (v) {
+                        if (v!.isEmpty) {
+                          return "required_field".tr;
+                        }
+                        if (v.compareTo(passwordController.text) != 0) {
+                          return "check_the_password_again".tr;
+                        }
+                        return null;
+                      },
+                      controller: confirmPasswordController,
+                    )),
                 GetHeight(height: Get.height * 0.02),
                 SizedBox(
                   width: Get.width * 0.87,
@@ -113,17 +172,20 @@ class SignUpPage extends StatelessWidget {
                                 signUpController.userRegister(
                                     email: emailController.text,
                                     password: passwordController.text,
+                                    phone: phoneController.text,
                                     name: nameController.text);
                               }
                             },
                             child: Row(children: [
                               GetWidth(width: Get.width * 0.3),
                               Text(
-                                "Sign Up",
+                                "signup".tr,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
-                                    .copyWith(color: AppColors.primaryColor),
+                                    .copyWith(
+                                        color: AppColors.primaryColor,
+                                        fontSize: 18.sp),
                               ),
                               GetWidth(width: Get.width * 0.14),
                               SizedBox(
@@ -140,13 +202,13 @@ class SignUpPage extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Or",
+                      "or".tr,
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
                           .copyWith(color: AppColors.fourthColor),
                     ),
-                    Text("Sign up with",
+                    Text("sign_up_with".tr,
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall!
@@ -167,7 +229,7 @@ class SignUpPage extends StatelessWidget {
                           SvgPicture.asset("assets/images/Facebook.svg"),
                           GetWidth(width: Get.width * 0.03),
                           Text(
-                            "Signup With Facebook",
+                            "signup_with_facebook".tr,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -190,7 +252,7 @@ class SignUpPage extends StatelessWidget {
                           SvgPicture.asset("assets/images/google.svg"),
                           GetWidth(width: Get.width * 0.03),
                           Text(
-                            "Signup With Google",
+                            "signup_with_google".tr,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -201,14 +263,22 @@ class SignUpPage extends StatelessWidget {
                 ),
                 GetHeight(height: Get.height * 0.03),
                 CustomRowButton(
-                    text1: "Already have an account?",
-                    text2: Text(
-                      " Sign in",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: AppColors.googleColor),
-                    ))
+                    text1: "already_have_an_acoount".tr,
+                    text2: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Text(
+                        " " + "login".tr,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: AppColors.googleColor),
+                      ),
+                    )),
+                SizedBox(
+                  height: 50.h,
+                )
               ],
             ),
           ),

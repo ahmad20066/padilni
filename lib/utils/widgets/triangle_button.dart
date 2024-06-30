@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:padilni/presentation/home/widgets/list/list_item.dart';
 import 'package:padilni/utils/colors.dart';
 
 class TriangleButton extends StatelessWidget {
-  const TriangleButton({super.key});
+  final VoidCallback onTap;
+  final bool isFavorite;
+  const TriangleButton(
+      {super.key, required this.onTap, required this.isFavorite});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        CustomPaint(
-          size: Size(
-              Get.width * 0.12,
-              (Get.width * 0.12)
-                  .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-          painter: RPSCustomPainter(),
-        ),
-        Positioned(
-            top: Get.height * 0.022,
-            right: Get.width * 0.04,
-            child: Icon(
-              Icons.favorite_outline,
-              color: Colors.red,
-              size: 20,
-            ))
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        children: [
+          CustomPaint(
+            size: Size(
+              30.h,
+              30.w,
+            ), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+            painter: RPSCustomPainter(),
+          ),
+          Positioned(
+              top: 12.h,
+              right: 8.w,
+              child: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_outline,
+                color: Colors.red,
+                size: 13.sp,
+              ))
+        ],
+      ),
     );
   }
 }
